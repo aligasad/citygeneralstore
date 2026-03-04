@@ -63,10 +63,9 @@ function Cart() {
   const GST = calcGST(totalAmount);
 
   const shipping = Number(5); // Flat shipping cost
-  const grandTotal =
-    Number(totalAmount) > 0 ? totalAmount + shipping + Number(GST) : 0;
 
-  const overallDiscount = parseFloat(grandTotal - grandTotal * 0.0);
+
+  const grandTotal = totalAmount > 60 ? totalAmount.toFixed(2) : (totalAmount === 0 ? totalAmount.toFixed(2): (totalAmount + shipping).toFixed(2))
 
   // extracting user information from firebase-----------------------------
   const navigate = useNavigate();
@@ -139,7 +138,9 @@ function Cart() {
         userid: JSON.parse(localStorage.getItem("user")).user.uid,
         status: "Ordered",
         paymentId: "COD",
+        grandTotal: grandTotal,
         paymentMethod: "Cash on Delivery",
+
       };
 
       //Reload  page for update order------------
@@ -175,11 +176,11 @@ function Cart() {
       description: "Secured Payment Dude ",
       handler: function (response) {
         toast.success("Payment Successful");
-        //Reload  page for update order------------
+        //Reload  page for update order----------------------
         setTimeout(() => {
           window.location.href = "/cart";
         }, 1200);
-        //after completing order clear cart storage--------------
+        //after completing order clear cart storage--------------------------
         localStorage.removeItem("cart");
         const paymentId = response.razorpay_payment_id;
 
@@ -196,6 +197,7 @@ function Cart() {
           email: JSON.parse(localStorage.getItem("user")).user.email,
           userid: JSON.parse(localStorage.getItem("user")).user.uid,
           paymentId,
+          grandTotal: grandTotal,
           paymentMethod: "Online Payment",
         };
 
@@ -263,7 +265,7 @@ function Cart() {
               const {
                 title,
                 price,
-                imageUrl,
+                images,
                 description,
                 originalPrice,
                 type,
@@ -280,7 +282,7 @@ function Cart() {
                   }`}
                 >
                   <img
-                    src={imageUrl}
+                    src={images[0]}
                     onClick={() =>
                       (window.location.href = `/productinfo/${id}`)
                     }
@@ -380,7 +382,7 @@ function Cart() {
               <span>Grand Total</span>
               <span className="flex items-center text-gray-700">
                 <span className="text-gray-800 mr-1">$</span>
-                {totalAmount > 60 ? totalAmount.toFixed(2) : (totalAmount === 0 ? totalAmount.toFixed(2): (totalAmount + shipping).toFixed(2))}
+                {grandTotal}
               </span>
             </div>
           </div>

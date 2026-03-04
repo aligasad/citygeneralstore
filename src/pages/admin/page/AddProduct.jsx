@@ -1,12 +1,50 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useData } from "../../../context/data/MyState";
 
 function AddProduct() {
   const context = useData();
   const { products, setProducts, addProduct } = context;
 
-  // Add new fields to your initial state if not already present
-  // Example: { ...products, brand: '', stock: '', discount: '', tags: '' }
+  // Image uploade on Cloudinary-----------------------
+  const [loading, setLoading] = useState(false);
+  const handleImageUpload = async (e) => {
+    const files = Array.from(e.target.files);
+    if (!files.length) return;
+
+    setLoading(true);
+
+    const uploadedImages = [];
+
+    for (let file of files) {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "CityGeneralStore");
+      formData.append("cloud_name", "ddwrazqlt");
+      formData.append("folder", "City General Store");
+
+      try {
+        const res = await fetch(
+          "https://api.cloudinary.com/v1_1/ddwrazqlt/image/upload",
+          {
+            method: "POST",
+            body: formData,
+          },
+        );
+
+        const data = await res.json();
+        uploadedImages.push(data.secure_url);
+      } catch (error) {
+        console.error("Upload Error:", error);
+      }
+    }
+
+    setProducts({
+      ...products,
+      images: [...products.images, ...uploadedImages],
+    });
+
+    setLoading(false);
+  };
 
   return (
     <div className="py-6 min-h-screen bg-gradient-to-br from-green-50 to-lime-100 flex items-center justify-center">
@@ -56,16 +94,6 @@ function AddProduct() {
             }
           />
           <input
-            type="number"
-            name="stock"
-            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Stock"
-            value={products.stock || ""}
-            onChange={(e) =>
-              setProducts({ ...products, stock: e.target.value })
-            }
-          />
-          <input
             type="text"
             name="brand"
             className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
@@ -75,63 +103,32 @@ function AddProduct() {
               setProducts({ ...products, brand: e.target.value })
             }
           />
+
+          {/* ✅ Multiple Image Upload */}
           <input
-            type="text"
-            name="tags"
-            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Tags (comma separated)"
-            value={products.tags || ""}
-            onChange={(e) => setProducts({ ...products, tags: e.target.value })}
+            type="file"
+            multiple
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="bg-green-50 border px-4 py-2 rounded-lg cursor-pointer"
           />
-          <input
-            type="text"
-            name="selfLife"
-            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Self Life"
-            value={products.selfLife || ""}
-            onChange={(e) => setProducts({ ...products, selfLife: e.target.value })}
-          />
-          <input
-            type="text"
-            name="imageUrl"
-            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Image URL"
-            value={products.imageUrl}
-            onChange={(e) =>
-              setProducts({ ...products, imageUrl: e.target.value })
-            }
-          />
-          <input
-            type="text"
-            name="imageUrl2"
-            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Image URL"
-            value={products.imageUrl2}
-            onChange={(e) =>
-              setProducts({ ...products, imageUrl2: e.target.value })
-            }
-          />
-          <input
-            type="text"
-            name="imageUrl3"
-            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Image URL"
-            value={products.imageUrl3}
-            onChange={(e) =>
-              setProducts({ ...products, imageUrl3: e.target.value })
-            }
-          />
-          <input
-            type="text"
-            name="imageUrl4"
-            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Image URL"
-            value={products.imageUrl4}
-            onChange={(e) =>
-              setProducts({ ...products, imageUrl4: e.target.value })
-            }
-          />
-          
+
+          {loading && (
+            <p className="text-sm text-green-600">Uploading images...</p>
+          )}
+
+          {/* Preview Images */}
+          <div className="grid grid-cols-3 gap-2">
+            {products.images?.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt="product"
+                className="w-full h-20 object-cover rounded"
+              />
+            ))}
+          </div>
+
           <input
             type="text"
             name="category"
@@ -159,30 +156,6 @@ function AddProduct() {
             value={products.description}
             onChange={(e) =>
               setProducts({ ...products, description: e.target.value })
-            }
-          ></textarea>
-          {/* New Ingredients Field */}
-          <textarea
-            cols="30"
-            rows="3"
-            name="ingredients"
-            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Ingredients (comma separated or paragraph)"
-            value={products.ingredients || ""}
-            onChange={(e) =>
-              setProducts({ ...products, ingredients: e.target.value })
-            }
-          ></textarea>
-          {/* New Benefits Field */}
-          <textarea
-            cols="30"
-            rows="3"
-            name="benefits"
-            className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-            placeholder="Benefits (comma separated or paragraph)"
-            value={products.benefits || ""}
-            onChange={(e) =>
-              setProducts({ ...products, benefits: e.target.value })
             }
           ></textarea>
           {/* Checkboxes */}
@@ -219,8 +192,6 @@ function AddProduct() {
         </button>
       </div>
     </div>
-
-    
   );
 }
 

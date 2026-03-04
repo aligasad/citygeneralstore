@@ -73,17 +73,19 @@ function ProductCard() {
                 item.title
                   .toLowerCase()
                   .includes(
-                    searchkey.toLowerCase().trim().replace(/\s+/g, " ")
+                    searchkey.toLowerCase().trim().replace(/\s+/g, " "),
                   ) ||
                 item.type
                   .toLowerCase()
-                  .includes(searchkey.toLowerCase().trim().replace(/\s+/g, " "))
+                  .includes(
+                    searchkey.toLowerCase().trim().replace(/\s+/g, " "),
+                  ),
             )
             .filter((item) =>
               item.category
                 .replace(/\s+/g, "")
                 .toLowerCase()
-                .includes(filterType)
+                .includes(filterType),
             )
             .slice(0, 5)
             .filter((obj) => obj.price.trim().includes(filterPrice))
@@ -91,7 +93,7 @@ function ProductCard() {
               const {
                 title,
                 price,
-                imageUrl,
+                images,
                 id,
                 category,
                 type,
@@ -125,15 +127,9 @@ function ProductCard() {
                       }}
                     >
                       <div className="flex justify-center items-center p-4 bg-white rounded-t-lg border-2 border-b-0 border-[#003d29] relative">
-                        {stock > 0 ? (
-                          <p className=" absolute bottom-0 left-0 bg-green-700 px-2 rounded-tr-lg text-[10px] sm:text-[13px] text-white font-semibold z-10 ">
-                            On Sale
-                          </p>
-                        ) : (
-                          <p className=" absolute bottom-0 left-0 bg-[#b35d52] px-2 rounded-tr-lg text-[10px] sm:text-[13px] text-white font-semibold z-10 ">
-                            Sold Out
-                          </p>
-                        )}
+                        <p className=" absolute bottom-0 left-0 bg-green-700 px-2 rounded-tr-lg text-[10px] sm:text-[13px] text-white font-semibold z-10 ">
+                          On Sale
+                        </p>
                         {isNew ? (
                           <p className="absolute bottom-0 right-0 px-3 text-[13px] text-white font-semibold z-10 bg-black rounded-tl-lg">
                             {" "}
@@ -147,7 +143,7 @@ function ProductCard() {
                             (window.location.href = `/productinfo/${id}`)
                           }
                           className="h-36 sm:h-44 object-contain transition-transform rounded-md duration-300 hover:scale-110 cursor-pointer"
-                          src={imageUrl}
+                          src={images[0]}
                           alt={title}
                         />
                       </div>
@@ -174,27 +170,18 @@ function ProductCard() {
                         </div>
 
                         <div className="flex items-center justify-between mt-2 w-[70%] sm:w-[55%]">
-                          {stock > 0 ? (
-                            <button
-                              onClick={() => toggleCart(item)}
-                              className={`px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg transition duration-800 hover:scale-105 cursor-pointer ${
-                                cartItems.some((p) => p.id === item.id)
-                                  ? "bg-red-700 text-white hover:bg-black"
-                                  : "bg-[#439373] text-black hover:bg-black hover:text-white"
-                              }`}
-                            >
-                              {cartItems.some((p) => p.id === item.id)
-                                ? "Remove"
-                                : "Add to Cart"}
-                            </button>
-                          ) : (
-                            <button
-                              disabled
-                              className="px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg text-white bg-[#b35d52] cursor-not-allowed"
-                            >
-                              Out of Stock
-                            </button>
-                          )}
+                          <button
+                            onClick={() => toggleCart(item)}
+                            className={`px-3 py-[6px] sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-lg transition duration-800 hover:scale-105 cursor-pointer ${
+                              cartItems.some((p) => p.id === item.id)
+                                ? "bg-red-700 text-white hover:bg-black"
+                                : "bg-[#439373] text-black hover:bg-black hover:text-white"
+                            }`}
+                          >
+                            {cartItems.some((p) => p.id === item.id)
+                              ? "Remove"
+                              : "Add to Cart"}
+                          </button>
                         </div>
                       </div>
                     </div>

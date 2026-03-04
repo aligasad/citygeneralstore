@@ -3,48 +3,51 @@ import { motion } from "framer-motion";
 
 const infoCards = [
   {
-    icon: "🛡️",
-    title: "30-Day Guarantee",
-    description: "Not satisfied? Get your money back, no questions asked.",
+    icon: "💯",
+    title: "Quality Guaranteed",
+    description: "Fresh and quality-checked grocery products for your family.",
   },
   {
     icon: "🚚",
-    title: "Free Shipping",
-    description: "Free worldwide shipping on all orders over $50.",
+    title: "Fast Local Delivery",
+    description: "Quick home delivery in Diuliya, Madarsa Diuliya & Pipra.",
   },
   {
-    icon: "🔁",
-    title: "Easy Returns",
-    description: "Simple and hassle-free return process.",
+    icon: "💰",
+    title: "Affordable Prices",
+    description: "Best market rates so everyone can shop comfortably.",
   },
   {
-    icon: "🌿",
-    title: "Premium Quality",
-    description: "Highest quality organic ingredients, guaranteed.",
+    icon: "🏪",
+    title: "Trusted Local Store",
+    description: "Serving the community with honesty and reliability.",
   },
 ];
 
 const TransformSection = () => {
   return (
-    <div className="bg-[#3a9a72] text-white py-20 px-6 md:px-16 text-center">
+    <div className="bg-green-700 text-white py-20 px-6 md:px-16 text-center">
+      
       {/* Main Heading */}
       <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-        Ready to Transform <br /> Your Skin?
+        Ready to Shop <br /> Daily Essentials?
       </h1>
 
       {/* Subtitle */}
-      <p className="text-lg md:text-xl text-gray-100 mt-4 max-w-2xl mx-auto">
-        Join thousands of satisfied customers who have discovered the power of
-        organic skincare. Your skin deserves the best nature has to offer.
+      <p className="text-lg md:text-xl text-green-100 mt-4 max-w-2xl mx-auto">
+        City General Store is your trusted grocery partner in Diuliya Dhala,
+        Narkatiaganj. Fresh products, fair pricing, and reliable service —
+        everything your family needs in one place.
       </p>
 
       {/* Buttons */}
       <div className="mt-8 flex justify-center gap-4 flex-wrap">
-        <button className="bg-[#f9e089] text-black px-6 py-3 rounded-xl font-semibold hover:bg-yellow-300 transition">
-          ✨ Order Now - $89.99
+        <button className="bg-yellow-400 text-black px-6 py-3 rounded-xl font-semibold hover:bg-yellow-300 transition">
+          🛒 Shop Now
         </button>
-        <button className="bg-white text-black px-6 py-3 rounded-xl font-semibold hover:bg-gray-200 transition">
-          View Ingredients
+
+        <button className="bg-white text-green-700 px-6 py-3 rounded-xl font-semibold hover:bg-gray-200 transition">
+          View All Products
         </button>
       </div>
 
@@ -67,17 +70,17 @@ const TransformSection = () => {
 const InfoCard = ({ icon, title, description, index }) => {
   return (
     <motion.div
-      className="bg-white rounded-xl p-6 text-center shadow-md border hover:shadow-xl transition duration-300"
+      className="bg-white rounded-xl p-6 text-center shadow-md hover:shadow-xl transition duration-300"
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       whileHover={{ y: -5 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
     >
-      <div className="bg-[#4aa87f] rounded-xl p-6 hover:shadow-md transform hover:scale-103 transition-all duration-300 ease-in-out">
+      <div className="bg-green-600 text-white rounded-xl p-6 transform hover:scale-105 transition-all duration-300 ease-in-out">
         <div className="text-2xl mb-2">{icon}</div>
         <h3 className="text-base font-bold mb-1">{title}</h3>
-        <p className="text-sm text-gray-100">{description}</p>
+        <p className="text-sm text-green-100">{description}</p>
       </div>
     </motion.div>
   );

@@ -49,7 +49,7 @@ function ProductInfo() {
       try {
         const q = query(
           collection(firebaseDB, "products"),
-          where("type", "==", products.type)
+          where("type", "==", products.type),
         );
         const querySnapshot = await getDocs(q);
         const items = [];
@@ -116,9 +116,9 @@ function ProductInfo() {
 
   return (
     <section className="text-gray-700 body-font overflow-hidden bg-gradient-to-br from-green-50 to-blue-100 min-h-screen">
-      <div className="container px-2 md:px-5 py-5 mx-auto">
+      <div className="container ">
         {products && (
-          <div className="max-w-max mx-auto bg-white rounded-2xl shadow-lg p-4 md:p-8">
+          <div className="max-w-max mx-auto bg-white shadow-lg py-4 px-8 md:p-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Images Section */}
               <div>
@@ -127,16 +127,16 @@ function ProductInfo() {
                   <img
                     alt="ecommerce"
                     className="w-full max-h-[55vh] object-contain rounded-xl transition-all duration-300"
-                    src={selectedImage || products.imageUrl}
+                    src={selectedImage || products.images[0]}
                   />
                 </div>
                 {/* Thumbnails */}
                 <div className="flex gap-3 justify-center">
                   {[
-                    products.imageUrl,
-                    products.imageUrl2,
-                    products.imageUrl3,
-                    products.imageUrl4,
+                    products.images[0],
+                    products.images[1],
+                    products.images[2],
+                    products.images[3],
                   ]
                     .filter(Boolean)
                     .map((url, idx) => (
@@ -195,9 +195,7 @@ function ProductInfo() {
                       </span>
                     </div>
                     <div>
-                      <span className="font-bold text-green-700">
-                        Type:
-                      </span>{" "}
+                      <span className="font-bold text-green-700">Type:</span>{" "}
                       <span className="text-gray-700 font-semibold text-[13px]">
                         {products.type ? products.type.toUpperCase() : "N/A"}
                       </span>
@@ -207,25 +205,13 @@ function ProductInfo() {
                         Self Life:
                       </span>{" "}
                       <span className="text-gray-700 font-semibold text-[13px]">
-                        {products.selfLife ? products.selfLife.toUpperCase() : "N/A"}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="font-bold text-green-700">
-                        Stock:
-                      </span>{" "}
-                      <span
-                        className={` ${
-                          products.stock > 0 ? products.stock <= 5 ? "text-amber-600 font-semibold" :"text-green-600 font-bold" : "text-red-500 font-bold"
-                        }`}
-                      >
-                        {products.stock > 0 ? products.stock <= 5 ? "Low in Stock" : `${products.stock} Items` : "Out of Stock"}
+                        {products.selfLife
+                          ? products.selfLife.toUpperCase()
+                          : "N/A"}
                       </span>
                     </div>
                     <div className="sm:col-span-2 mt-0 sm:mt-3">
-                      <span className="font-bold text-green-700">
-                        Tags:
-                      </span>{" "}
+                      <span className="font-bold text-green-700">Tags:</span>{" "}
                       {products.tags ? (
                         products.tags.split("|").map((tag, i) => (
                           <span
@@ -301,42 +287,6 @@ function ProductInfo() {
                           ) : (
                             <span className="text-gray-400">N/A</span>
                           )}
-                        </div>  
-                      )}
-                    </div>
-
-                    {/* Benefits */}
-                    <div className="border border-gray-200 rounded-xl overflow-hidden">
-                      <button
-                        className="cursor-pointer w-full text-left px-5 py-2 bg-gray-100 font-semibold text-gray-700 flex justify-between items-center transition duration-200 hover:bg-gray-200"
-                        onClick={() => toggleSection("benefits")}
-                      >
-                        <span>Benefits</span>
-                        <FaArrowCircleDown
-                          className={`transform transition-transform duration-300 ${
-                            openSection === "benefits"
-                              ? "rotate-180 text-[#439373]"
-                              : ""
-                          }`}
-                        />
-                      </button>
-                      {openSection === "benefits" && (
-                        <div className="p-5 text-sm md:text-base text-gray-600 border-t border-gray-200">
-                          {products.benefits ? (
-                            products.benefits.split("|").map((item, index) => (
-                              <div
-                                key={index}
-                                className="flex items-start mb-2"
-                              >
-                                <FaCheckCircle className="text-green-500 mr-2 mt-1 flex-shrink-0" />
-                                <span className="text-gray-700">
-                                  {item.trim()}
-                                </span>
-                              </div>
-                            ))
-                          ) : (
-                            <span className="text-gray-400">N/A</span>
-                          )}
                         </div>
                       )}
                     </div>
@@ -356,33 +306,24 @@ function ProductInfo() {
                         <span className="ml-3 bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs font-bold">
                           {calculateDiscount(
                             products.originalPrice,
-                            products.price
+                            products.price,
                           )}
                           % OFF
                         </span>
                       )}
                     </div>
-                    {products.stock > 0 ? (
-                      <button
-                        onClick={() => toggleCart(products)}
-                        className={`px-3 w-full sm:py-2 h-10 sm:h-12 mr-2 text-[14px] text-white sm:text-base font-semibold rounded-sm transition text-wh duration-200 hover:shadow-md hover:shadow-gray-800 cursor-pointer ${
-                          cartItems.some((p) => p.id === products.id)
-                            ? "bg-red-700 text-white"
-                            : "bg-[#439373]  hover:text-white"
-                        }`}
-                      >
-                        {cartItems.some((p) => p.id === products.id)
-                          ? "Remove"
-                          : "Add to Cart"}
-                      </button>
-                    ) : (
-                      <button
-                        disabled
-                        className="px-3 w-full sm:py-2 h-10 sm:h-12 mr-2 text-[14px] sm:text-base font-semibold rounded-sm text-white bg-[#b35d52] cursor-not-allowed"
-                      >
-                        Out of Stock
-                      </button>
-                    )}
+                    <button
+                      onClick={() => toggleCart(products)}
+                      className={`px-3 w-full sm:py-2 h-10 sm:h-12 mr-2 text-[14px] text-white sm:text-base font-semibold rounded-sm transition text-wh duration-200 hover:shadow-md hover:shadow-gray-800 cursor-pointer ${
+                        cartItems.some((p) => p.id === products.id)
+                          ? "bg-red-700 text-white"
+                          : "bg-[#439373]  hover:text-white"
+                      }`}
+                    >
+                      {cartItems.some((p) => p.id === products.id)
+                        ? "Remove"
+                        : "Add to Cart"}
+                    </button>
                   </div>
                 </div>
               </div>
@@ -409,14 +350,22 @@ function ProductInfo() {
                         alt={prod.title}
                         className="w-32 h-32 object-contain rounded-lg mb-2 m-auto"
                       />
-                      <div className="font-semibold text-gray-800 line-clamp-1">{prod.title}</div>
+                      <div className="font-semibold text-gray-800 line-clamp-1">
+                        {prod.title}
+                      </div>
                       <div>
-                        <span className="text-green-700 font-bold">${prod.price}</span>
-                        <span className="text-[14px] text-rose-600 font-semibold line-through decoration-1 ml-2">${prod.originalPrice}</span>
+                        <span className="text-green-700 font-bold">
+                          ${prod.price}
+                        </span>
+                        <span className="text-[14px] text-rose-600 font-semibold line-through decoration-1 ml-2">
+                          ${prod.originalPrice}
+                        </span>
                       </div>
                       <button
                         className="mt-2 px-3 py-1 bg-[#439373] text-white rounded hover:bg-green-800 text-xs cursor-pointer transition-all duration-200"
-                        onClick={() => window.location.href = `/productinfo/${prod.id}`}
+                        onClick={() =>
+                          (window.location.href = `/productinfo/${prod.id}`)
+                        }
                       >
                         View
                       </button>

@@ -1,60 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaCheckCircle, FaStar } from "react-icons/fa";
-import { useData } from "../../context/data/MyState";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/CartSlice";
-import { toast } from "react-toastify";
 
-const tabs = ["Ingredients", "How to Use", "Reviews"];
+const tabs = ["Product Details", "Storage Info", "Reviews"];
 
 const content = {
-  Ingredients: [
+  "Product Details": [
     {
-      title: "Hyaluronic Acid",
-      desc: "Deep hydration and plumping",
-      percent: "2%",
+      title: "Premium Quality",
+      desc: "Long grain, aromatic and high-quality basmati rice.",
+      percent: "5 Kg Pack",
     },
     {
-      title: "Vitamin C",
-      desc: "Brightening and antioxidant protection",
-      percent: "15%",
+      title: "Fresh Stock",
+      desc: "Directly sourced from trusted suppliers.",
+      percent: "New Arrival",
     },
     {
-      title: "Green Tea Extract",
-      desc: "Anti-inflammatory and soothing",
-      percent: "5%",
+      title: "High Nutrition",
+      desc: "Rich in carbohydrates and essential nutrients.",
+      percent: "100% Natural",
     },
     {
-      title: "Jojoba Oil",
-      desc: "Natural moisturizing and balancing",
-      percent: "10%",
-    },
-    {
-      title: "Aloe Vera",
-      desc: "Healing and hydrating properties",
-      percent: "8%",
+      title: "No Artificial Polish",
+      desc: "Maintains natural texture and taste.",
+      percent: "Pure",
     },
   ],
-  "How to Use": [
-    "Cleanse your face with a gentle, organic cleanser",
-    "Pat skin dry with a clean towel",
-    "Apply 2–3 drops of serum to fingertips",
-    "Gently massage into face and neck in upward motions",
-    "Allow 5–10 minutes for complete absorption",
+
+  "Storage Info": [
+    "Store in a cool and dry place",
+    "Keep away from direct sunlight",
+    "Close the pack tightly after use",
+    "Best before 12 months from packaging date",
   ],
+
   Reviews: [
     {
-      name: "Sarah M.",
-      text: "This serum transformed my skin in just 2 weeks! My fine lines are visibly reduced and my skin glows.",
+      name: "Jawed Alam",
+      text: "Very good quality rice. Fragrance is amazing and cooking result is perfect.",
     },
     {
-      name: "Emma K.",
-      text: "Love that it's 100% organic. No irritation on my sensitive skin and the hydration lasts all day.",
+      name: "Asad Alam",
+      text: "Price is reasonable compared to market. Will purchase again.",
     },
     {
-      name: "Lisa R.",
-      text: "The best investment for my skincare routine. Natural, effective, and the packaging is beautiful!",
+      name: "Shahbaz Bhaijaan",
+      text: "Delivery was fast and product was properly packed. Highly recommended!",
     },
   ],
 };
@@ -64,7 +56,7 @@ const containerVariants = {
   hidden: {},
   show: {
     transition: {
-      staggerChildren: 0.15, // delay between children
+      staggerChildren: 0.15,
     },
   },
 };
@@ -75,50 +67,49 @@ const itemVariants = {
 };
 
 const ProductShow = () => {
-
-
-  const [activeTab, setActiveTab] = useState("Ingredients");
-
+  const [activeTab, setActiveTab] = useState("Product Details");
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 p-6 max-w-6xl mx-auto">
-      {/* Left Image + Product Info */}
+
+      {/* LEFT SIDE */}
       <div className="w-full lg:w-1/2 space-y-4">
+
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           whileHover={{ y: -5 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
           <img
-            src="https://i.ibb.co/6JskvgZx/banner2.jpg"
-            alt="Serum"
-            className="rounded-xl shadow-lg w-full"
+            src="https://t4.ftcdn.net/jpg/08/27/71/43/360_F_827714300_7pTBq2s243ECauhWjQDyDZaTSMXFkjSA.jpg"
+            alt="Basmati Rice"
+            className="rounded-xl shadow-lg w-full sm:h-[310px] object-top object-cover "
           />
         </motion.div>
 
-        {/* Product Info Section */}
-
+        {/* Product Info */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
           whileHover={{ y: -5 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
           <div className="bg-white p-5 rounded-xl shadow space-y-3">
+
             <div className="flex gap-2">
-              <span className="bg-green-100 text-[#449474] px-3 py-1 rounded-full text-sm font-medium">
-                🌿 100% Organic
+              <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">
+                🛒 Grocery Item
               </span>
               <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">
-                🧪 Dermatologist Tested
+                ⭐ Best Seller
               </span>
             </div>
 
             <h2 className="text-2xl font-bold text-green-900">
-              Pure Organic Facial Serum
+              Premium Basmati Rice (5 Kg)
             </h2>
 
             <div className="flex items-center gap-2">
@@ -127,28 +118,29 @@ const ProductShow = () => {
                   <FaStar key={i} />
                 ))}
               </div>
-              <span className="text-sm text-gray-600">(1,247 reviews)</span>
+              <span className="text-sm text-gray-600">(324 reviews)</span>
             </div>
 
-            <p className="text-3xl font-bold text-green-800">₹2999</p>
+            <p className="text-3xl font-bold text-green-800">₹499</p>
 
-            <button className="w-full cursor-pointer bg-[#449474] text-white font-semibold py-3 rounded-xl hover:bg-[#449474] transition">
-              Buy at - ₹3999
+            <button className="w-full cursor-pointer bg-green-600 text-white font-semibold py-3 rounded-xl hover:bg-green-700 transition">
+              Shop Now
             </button>
           </div>
         </motion.div>
       </div>
 
-      {/* Right Content */}
+      {/* RIGHT SIDE */}
       <div className="w-full lg:w-1/2">
+
         {/* Tabs */}
-        <div className="flex mb-4 gap-2 bg-[#f4f4ee] p-1 rounded-sm">
+        <div className="flex mb-4 gap-2 bg-gray-100 p-1 rounded">
           {tabs.map((tab) => (
             <button
               key={tab}
-              className={`flex-1 py-1 rounded-sm transition-all ${
+              className={`flex-1 py-2 rounded transition-all ${
                 activeTab === tab
-                  ? "bg-white text-[#449474] font-semibold  "
+                  ? "bg-white text-green-700 font-semibold shadow"
                   : "text-gray-500"
               }`}
               onClick={() => setActiveTab(tab)}
@@ -158,7 +150,7 @@ const ProductShow = () => {
           ))}
         </div>
 
-        {/* Animated Staggered Content */}
+        {/* Animated Content */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
@@ -168,7 +160,9 @@ const ProductShow = () => {
             exit="hidden"
             className="space-y-4"
           >
-            {activeTab === "Ingredients" &&
+
+            {/* Product Details */}
+            {activeTab === "Product Details" &&
               content[activeTab].map((item, i) => (
                 <motion.div
                   key={i}
@@ -179,26 +173,28 @@ const ProductShow = () => {
                     <h3 className="font-bold text-green-800">{item.title}</h3>
                     <p className="text-gray-600 text-sm">{item.desc}</p>
                   </div>
-                  <span className="text-[#449474] font-medium bg-green-50 px-3 py-1 rounded-full text-sm">
+                  <span className="text-green-700 font-medium bg-green-50 px-3 py-1 rounded-full text-sm">
                     {item.percent}
                   </span>
                 </motion.div>
               ))}
 
-            {activeTab === "How to Use" &&
+            {/* Storage Info */}
+            {activeTab === "Storage Info" &&
               content[activeTab].map((step, i) => (
                 <motion.div
                   key={i}
                   variants={itemVariants}
                   className="bg-green-50 rounded-xl px-4 py-3 flex items-start gap-3"
                 >
-                  <span className="bg-[#449474] text-white rounded-full w-6 h-6 flex items-center justify-center font-bold">
+                  <span className="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center font-bold">
                     {i + 1}
                   </span>
                   <p className="text-gray-700">{step}</p>
                 </motion.div>
               ))}
 
+            {/* Reviews */}
             {activeTab === "Reviews" &&
               content[activeTab].map((review, i) => (
                 <motion.div
@@ -211,9 +207,8 @@ const ProductShow = () => {
                       <p className="font-semibold text-green-800">
                         {review.name}
                       </p>
-                      <span className="bg-green-100 text-[#449474] px-2 py-0.5 rounded-full text-xs flex items-center gap-1">
-                        <FaCheckCircle className="text-green-500" size={12} />{" "}
-                        Verified
+                      <span className="bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs flex items-center gap-1">
+                        <FaCheckCircle size={12} /> Verified
                       </span>
                     </div>
                     <div className="flex text-yellow-400">

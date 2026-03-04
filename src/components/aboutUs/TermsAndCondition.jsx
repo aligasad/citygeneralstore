@@ -7,87 +7,112 @@ const TermsAndConditions = () => {
 
   return (
     <section className="bg-[#fffaf4] text-[#2c2c2c] py-12 px-6 md:px-12 lg:px-24 leading-relaxed">
-      <h1 className="text-3xl md:text-4xl font-semibold mb-6 text-[#003d29]">Terms & Conditions</h1>
+      
+      <h1 className="text-3xl md:text-4xl font-semibold mb-6 text-[#003d29]">
+        Terms & Conditions
+      </h1>
+
       <p className="mb-8">
-        Welcome to <strong>Noor By Shayan</strong>, a premium handmade Ayurvedic skincare brand under <strong>Zaphira Organic Farms (OPC) Private Limited</strong>.
-        By accessing or purchasing from our website, social media platforms, or any affiliated channels, you agree to abide by the following terms and conditions.
+        Welcome to <strong>City General Store</strong>, located at 
+        <strong> Diuliya Dhala, Narkatiaganj</strong>, owned and managed by 
+        <strong> Afzal Haroon</strong>. 
+        By placing an order or using our services, you agree to the following 
+        terms and conditions.
       </p>
 
-      <div className="space-y-6">
+      <div className="space-y-8">
+
+        {/* Product Policy */}
         <div>
-          <h2 className="text-xl font-bold mb-2">1. 🛒 Product Use & Responsibility</h2>
+          <h2 className="text-xl font-bold mb-2">1. 🛒 Products & Availability</h2>
           <ul className="list-disc list-inside space-y-1">
-            <li>All products sold by Noor By Shayan are for external, personal use only.</li>
-            <li>Please read all ingredients and usage instructions before applying. Patch testing is recommended.</li>
-            <li>We are not liable for any skin reactions, allergies, or issues resulting from incorrect usage or personal skin conditions.</li>
+            <li>All grocery and household products are subject to availability.</li>
+            <li>Prices may change without prior notice.</li>
+            <li>We strive to provide accurate product details, but minor variations may occur.</li>
           </ul>
         </div>
 
+        {/* Orders & Payments */}
         <div>
-          <h2 className="text-xl font-bold mb-2">2. 📦 Orders & Payments</h2>
+          <h2 className="text-xl font-bold mb-2">2. 💳 Orders & Payments</h2>
           <ul className="list-disc list-inside space-y-1">
-            <li>Orders are confirmed only after full payment is received, except for Cash on Delivery (COD).</li>
-            <li>Once placed, orders cannot be modified or cancelled.</li>
-            <li>We reserve the right to cancel orders suspected of fraud or incorrect address information.</li>
+            <li>Orders are confirmed only after successful payment confirmation (for online payments).</li>
+            <li>Cash on Delivery (COD) may be available within delivery areas.</li>
+            <li>City General Store reserves the right to cancel any suspicious or incomplete orders.</li>
           </ul>
         </div>
 
+        {/* Delivery Policy */}
         <div>
-          <h2 className="text-xl font-bold mb-2">3. 📬 Shipping & Delivery</h2>
+          <h2 className="text-xl font-bold mb-2">3. 🚚 Delivery Policy</h2>
           <ul className="list-disc list-inside space-y-1">
-            <li>Orders are shipped via trusted courier partners.</li>
-            <li>Shipping timelines are mentioned in our Shipping Policy but may vary due to external conditions.</li>
-            <li>If delivery fails due to customer unavailability, reshipping charges will apply.</li>
+            <li>Home delivery is available in <strong>Diuliya, Madarsa Diuliya, and Pipra</strong>.</li>
+            <li>Minimum order value for delivery is <strong>₹699</strong>.</li>
+            <li>Delivery timing may vary depending on order volume and weather conditions.</li>
+            <li>If the customer is unavailable at the time of delivery, redelivery may be rescheduled.</li>
           </ul>
         </div>
 
+        {/* Return Policy */}
         <div>
           <h2 className="text-xl font-bold mb-2">4. 🔁 Return & Refund Policy</h2>
           <ul className="list-disc list-inside space-y-1">
-            <li>Due to the handmade, hygienic nature of our products, returns are not accepted.</li>
-            <li>Refunds are only provided if the product is damaged in transit or the wrong product is received.</li>
-            <li>To be eligible, issues must be reported within 24 hours with the product unused and sealed.</li>
-            <li>No refund will be processed if the seal is broken or product is used.</li>
+            <li>Returns are accepted only if the product is damaged or incorrect.</li>
+            <li>Issues must be reported within 24 hours of delivery.</li>
+            <li>Refunds will be processed after product verification.</li>
+            <li>No returns will be accepted for opened or used products.</li>
           </ul>
         </div>
 
+        {/* Pricing */}
         <div>
-          <h2 className="text-xl font-bold mb-2">5. 📊 Pricing & Promotions</h2>
+          <h2 className="text-xl font-bold mb-2">5. 📊 Pricing & Offers</h2>
           <ul className="list-disc list-inside space-y-1">
-            <li>All prices are in INR (₹) and may change without notice.</li>
-            <li>Promotions are time-bound and cannot be applied post order placement.</li>
-            <li>Noor By Shayan reserves the right to modify or terminate any offer at any time.</li>
+            <li>All prices are in INR (₹).</li>
+            <li>Special offers and discounts are time-limited.</li>
+            <li>Offers cannot be applied after order confirmation.</li>
           </ul>
         </div>
 
+        {/* Responsibility */}
         <div>
-          <h2 className="text-xl font-bold mb-2">6. 🛡 Intellectual Property</h2>
+          <h2 className="text-xl font-bold mb-2">6. ⚠ Customer Responsibility</h2>
           <ul className="list-disc list-inside space-y-1">
-            <li>All content, images, designs, and brand identity belong to Zaphira Organic Farms.</li>
-            <li>Unauthorized use, reproduction, or distribution is prohibited and may lead to legal action.</li>
+            <li>Please provide correct address and contact details.</li>
+            <li>Ensure someone is available to receive the order.</li>
+            <li>Verify items at the time of delivery.</li>
           </ul>
         </div>
 
+        {/* Governing Law */}
         <div>
           <h2 className="text-xl font-bold mb-2">7. ⚖ Governing Law</h2>
           <p>
-            These terms are governed by the laws of India. Any disputes shall be subject to the jurisdiction of courts in Lucknow, Uttar Pradesh.
+            These terms are governed by the laws of India. Any disputes shall 
+            fall under the jurisdiction of courts in Bihar.
           </p>
         </div>
 
+        {/* Contact */}
         <div>
           <h2 className="text-xl font-bold mb-2">8. 📞 Contact Information</h2>
-          <p>For queries, concerns, or grievances, contact us at:</p>
+          <p>
+            For any queries or concerns, please visit us at:
+          </p>
           <ul className="list-disc list-inside mt-2">
-            <li>📧 <a href="mailto:hello@noorbyshayan.in" className="text-[#007044] underline">hello@noorbyshayan.in</a></li>
-            <li>📞 <a href="tel:+917518202507" className="text-[#007044] underline">+91-7518202507</a></li>
+            <li>🏬 City General Store, Diuliya Dhala, Narkatiaganj</li>
+            <li>👤 Owner: Afzal Haroon</li>
+            <li>📍 Delivery Areas: Diuliya, Madarsa Diuliya, Pipra</li>
           </ul>
         </div>
+
       </div>
 
       <p className="mt-10 text-sm text-[#6a6a6a]">
-        By placing an order, you confirm that you have read, understood, and agreed to the above Terms & Conditions.
+        By placing an order with City General Store, you confirm that you have 
+        read, understood, and agreed to these Terms & Conditions.
       </p>
+
     </section>
   );
 };

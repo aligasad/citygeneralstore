@@ -136,7 +136,7 @@ function Allproducts() {
                   quantity,
                   isNew,
                   stock,
-                  imageUrl,
+                  images,
                   id,
                 } = item;
                 return (
@@ -189,7 +189,7 @@ function Allproducts() {
                               (window.location.href = `/productinfo/${id}`)
                             }
                             className="h-36 sm:h-44 object-contain transition-transform rounded-md duration-300 hover:scale-110 cursor-pointer"
-                            src={imageUrl}
+                            src={images[0]}
                             alt={title}
                           />
                         </div>
@@ -216,8 +216,7 @@ function Allproducts() {
                           </div>
 
                           <div className="flex items-center justify-between mt-2 w-[70%] sm:w-[55%]">
-                            {stock > 0 ? (
-                              <button
+                            <button
                                 onClick={() => toggleCart(item)}
                                 className={`px-3 h-8 sm:h-9 sm:w-27 sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-sm transition duration-200 hover:shadow-sm hover:shadow-gray-900 cursor-pointer ${
                                   cartItems.some((p) => p.id === item.id)
@@ -229,14 +228,6 @@ function Allproducts() {
                                   ? "Remove"
                                   : "Add to Cart"}
                               </button>
-                            ) : (
-                              <button
-                                disabled
-                                className="px-3 h-8 sm:h-9 sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-sm text-white bg-[#b35d52] cursor-not-allowed"
-                              >
-                                Out of Stock
-                              </button>
-                            )}
                           </div>
                         </div>
                       </div>

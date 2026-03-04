@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import { firebaseDB } from "../../firebase/FirebaseConfig";
+import { firebaseDB, auth } from "../../firebase/FirebaseConfig";
 import { toast } from "react-toastify";
 
 function CompleteProfile() {
   const navigate = useNavigate();
-  const userData = JSON.parse(localStorage.getItem("user"));
-  const uid = userData?.user?.uid;
-  const email = userData?.user?.email;
+  const user = auth.currentUser;
+  const uid = user?.uid;
+  const email = user?.email;
 
   const [form, setForm] = useState({
     name: "",
@@ -16,7 +16,7 @@ function CompleteProfile() {
     address: "",
     pincode: "",
     photoURL: "",
-    bio: "",
+    Biography: "",
   });
 
   // 🔄 Fetch existing user profile
@@ -54,25 +54,19 @@ function CompleteProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!uid) {
+      toast.error("User not authenticated");
+      return;
+    }
+
     try {
-      const signedUpAt = new Date().toISOString(); // optional timestamp
-
-      const updatedForm = {
-        ...form,
-        signedUpAt,
-      };
-
-      await setDoc(doc(firebaseDB, "users", uid), updatedForm);
-
-      // Update localStorage
-      const updatedUserData = {
-        ...userData,
-        user: {
-          ...userData.user,
-          ...updatedForm,
+      await setDoc(
+        doc(firebaseDB, "users", uid),
+        {
+          ...form,
         },
-      };
-      localStorage.setItem("user", JSON.stringify(updatedUserData));
+        { merge: true },
+      );
 
       toast.success("Profile saved successfully!");
       navigate("/profile");
@@ -88,7 +82,9 @@ function CompleteProfile() {
         onSubmit={handleSubmit}
         className="bg-white p-6 rounded-2xl shadow-lg w-full max-w-md space-y-4"
       >
-        <h2 className="text-2xl font-bold text-center">Complete Your Profile</h2>
+        <h2 className="text-2xl font-bold text-center">
+          Complete Your Profile
+        </h2>
 
         <input
           type="text"

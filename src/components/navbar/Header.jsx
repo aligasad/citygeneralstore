@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import { RiSearchLine } from "react-icons/ri";
-import logo from "../../assets/logo.jpg";
+import logo from "../../assets/logo.png";
 import {
   Dialog,
   DialogPanel,
@@ -100,7 +100,7 @@ function Navbar() {
     setIsDropdownOpen((prev) => !prev);
   };
 
-  // FOR LOGOUT-----------------
+  // FOR LOGO UT-----------------
   function handleLogout() {
     auth.signOut();
     setIsDropdownOpen((prev) => !prev);
@@ -144,7 +144,7 @@ function Navbar() {
       {/* Mobile View */}
       <div className="md:hidden flex justify-between items-center px-4 py-3">
         <Link to="/" className="text-2xl font-bold text-green-700">
-          <div className="border-2 border-green-700 p-1 rounded-full">
+          <div className="">
             <img
               onClick={onTop}
               src={logo}
@@ -396,8 +396,8 @@ function Navbar() {
             to="/"
             className="text-2xl font-bold text-green-700"
           >
-            <div className="border-2 border-green-700 p-1 rounded-full">
-              <img src={logo} alt="Logo" className="w-10 h-auto rounded" />
+            <div className="">
+              <img src={logo} alt="Logo" className="w-14 h-auto rounded" />
             </div>
           </Link>
           <nav className="hidden md:flex gap-6 text-sm text-[#003d29]">

@@ -1,44 +1,53 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaLeaf, FaTint, FaShieldAlt, FaHeart, FaMagic, FaSeedling } from "react-icons/fa";
+import { 
+  FaShoppingBasket, 
+  FaTruck, 
+  FaRupeeSign, 
+  FaStore, 
+  FaClock, 
+  FaSmile 
+} from "react-icons/fa";
 
 const benefits = [
   {
-    icon: <FaTint className="text-blue-500 w-8 h-8" />,
-    title: "Deep Hydration",
-    description: "Keeps your skin moisturized and glowing all day with deep natural hydration.",
+    icon: <FaShoppingBasket className="text-green-600 w-8 h-8" />,
+    title: "Wide Range of Groceries",
+    description: "All daily essential items available at one place for your convenience.",
   },
   {
-    icon: <FaHeart className="text-red-400 w-8 h-8" />,
-    title: "Anti-Aging Power",
-    description: "Reduces wrinkles and fine lines naturally for a youthful appearance.",
+    icon: <FaTruck className="text-blue-500 w-8 h-8" />,
+    title: "Fast Home Delivery",
+    description: "Quick delivery service in Diuliya, Madarsa Diuliya & Pipra for orders above ₹699.",
   },
   {
-    icon: <FaShieldAlt className="text-green-800 w-8 h-8" />,
-    title: "100% Chemical-Free",
-    description: "Free from parabens, sulfates and other harsh chemicals.",
+    icon: <FaRupeeSign className="text-yellow-500 w-8 h-8" />,
+    title: "Affordable Prices",
+    description: "Fair and competitive pricing so every family can shop comfortably.",
   },
   {
-    icon: <FaLeaf className="text-green-500 w-8 h-8" />,
-    title: "Eco-Friendly",
-    description: "Made from sustainable and biodegradable ingredients.",
+    icon: <FaStore className="text-green-800 w-8 h-8" />,
+    title: "Trusted Local Store",
+    description: "Serving the community of Diuliya Dhala, Narkatiaganj with honesty and trust.",
   },
   {
-    icon: <FaMagic className="text-yellow-400 w-8 h-8" />,
-    title: "Radiant Glow",
-    description: "Leaves your skin naturally glowing with a healthy shine.",
+    icon: <FaClock className="text-purple-500 w-8 h-8" />,
+    title: "Quick Service",
+    description: "Fast billing and friendly customer support for smooth shopping experience.",
   },
   {
-    icon: <FaSeedling className="text-pink-400 w-8 h-8" />,
-    title: "Gentle Formula",
-    description: "Safe for all skin types, even sensitive ones.",
+    icon: <FaSmile className="text-pink-500 w-8 h-8" />,
+    title: "Customer Satisfaction",
+    description: "Our priority is happy customers and long-term relationships.",
   },
 ];
 
 const Benefits = () => {
   return (
-    <section className="py-20 px-6 bg-gradient-to-b from-green-100 via-lime-50 to-white">
+    <section className="py-20 px-6 bg-gradient-to-b from-green-50 via-white to-green-100">
       <div className="max-w-6xl mx-auto">
+
+        {/* Section Heading */}
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -47,17 +56,23 @@ const Benefits = () => {
           viewport={{ once: true }}
         >
           <div className="flex justify-center items-center gap-2 text-green-700 mb-4">
-            <FaLeaf className="w-5 h-5" />
-            <span className="text-sm font-semibold uppercase tracking-wide">Skincare Benefits</span>
+            <FaStore className="w-5 h-5" />
+            <span className="text-sm font-semibold uppercase tracking-wide">
+              Why Choose Us
+            </span>
           </div>
+
           <h2 className="text-3xl md:text-5xl font-bold text-green-800 mb-4">
-            Why Choose Our <span className="block text-green-600">Organic Products?</span>
+            Why Shop From <span className="block text-green-600">City General Store?</span>
           </h2>
+
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Discover the natural goodness your skin deserves — chemical-free, eco-friendly, and radiantly effective.
+            Your trusted grocery partner in Diuliya Dhala, Narkatiaganj — 
+            offering quality products, fair prices, and reliable service.
           </p>
         </motion.div>
 
+        {/* Benefits Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {benefits.map((item, index) => (
             <motion.div
@@ -72,8 +87,14 @@ const Benefits = () => {
               <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-green-50 rounded-full shadow-sm">
                 {item.icon}
               </div>
-              <h3 className="text-xl font-semibold text-green-800">{item.title}</h3>
-              <p className="text-gray-600 mt-2 text-sm">{item.description}</p>
+
+              <h3 className="text-xl font-semibold text-green-800">
+                {item.title}
+              </h3>
+
+              <p className="text-gray-600 mt-2 text-sm">
+                {item.description}
+              </p>
             </motion.div>
           ))}
         </div>
@@ -87,22 +108,26 @@ const Benefits = () => {
           viewport={{ once: true }}
         >
           <div>
-            <div className="text-3xl font-bold">5★</div>
-            <p className="text-sm text-gray-500">Average Rating</p>
-          </div>
-          <div>
-            <div className="text-3xl font-bold">10K+</div>
-            <p className="text-sm text-gray-500">Happy Customers</p>
-          </div>
-          <div>
             <div className="text-3xl font-bold">100%</div>
-            <p className="text-sm text-gray-500">Organic</p>
+            <p className="text-sm text-gray-500">Quality Products</p>
           </div>
+
           <div>
-            <div className="text-3xl font-bold">0</div>
-            <p className="text-sm text-gray-500">Side Effects</p>
+            <div className="text-3xl font-bold">₹699+</div>
+            <p className="text-sm text-gray-500">Free Delivery</p>
+          </div>
+
+          <div>
+            <div className="text-3xl font-bold">3+</div>
+            <p className="text-sm text-gray-500">Delivery Areas</p>
+          </div>
+
+          <div>
+            <div className="text-3xl font-bold">Trusted</div>
+            <p className="text-sm text-gray-500">Local Store</p>
           </div>
         </motion.div>
+
       </div>
     </section>
   );

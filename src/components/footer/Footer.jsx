@@ -12,9 +12,11 @@ import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { firebaseDB } from "../../firebase/FirebaseConfig";
+import logo from "../../assets/logo.png";
 
 const Footer = () => {
   const navigate = useNavigate();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [navigate]);
@@ -27,6 +29,7 @@ const Footer = () => {
       toast.warning("Please login to subscribe.");
       return;
     }
+
     if (!email) {
       toast.error("Please enter your email address.");
       return;
@@ -64,22 +67,33 @@ const Footer = () => {
   return (
     <footer className="bg-[#003d29] text-white px-6 md:px-20 py-12">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-        {/* Logo and Description */}
+
+        {/* Logo + Description */}
         <div>
-          <h2 className="text-xl font-bold flex items-center mb-4">
-            <span className="text-2xl mr-2">🌿</span> Pure Organic
+          <h2 className="text-xl font-bold flex items-center gap-2 mb-4">
+            <img src={logo} width={25} alt="logo" />
+            <span>City General Store</span>
           </h2>
+
           <p className="text-sm leading-relaxed mb-4">
-            Transforming skincare with the purest organic ingredients.
-            Experience the power of nature for radiant, healthy skin.
+            Fresh groceries, household essentials, and daily needs — 
+            all available at affordable prices. Serving Diuliya Dhala, 
+            Narkatiaganj with trust and quality.
           </p>
+
           <div className="flex space-x-3">
-            {[FaInstagram, FaFacebookF, FaTwitter].map((Icon, index) => (
+            {[
+              { icon: FaInstagram, link: "#" },
+              { icon: FaFacebookF, link: "#" },
+              { icon: FaTwitter, link: "#" },
+            ].map((Con, index) => (
               <div
                 key={index}
-                className="group w-9 h-9 flex items-center justify-center bg-[#19523f] rounded-full cursor-pointer transform transition-transform duration-200 hover:scale-110"
+                className="group w-9 h-9 flex items-center justify-center bg-green-800 rounded-full cursor-pointer hover:scale-110 transition"
               >
-                <Icon className="text-white text-lg group-hover:text-amber-400" />
+                <a href={Con.link} target="_blank" rel="noopener noreferrer">
+                  <Con.icon className="text-white text-lg group-hover:text-yellow-400" />
+                </a>
               </div>
             ))}
           </div>
@@ -90,21 +104,28 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
           <ul className="space-y-2 text-sm">
             <li
-              className="hover:underline cursor-pointer hover:text-amber-400"
+              className="hover:underline cursor-pointer hover:text-yellow-400"
               onClick={() => navigate("about")}
             >
               About Us
             </li>
-            <li className="hover:underline cursor-pointer hover:text-amber-400">Products</li>
             <li
-              className="hover:underline cursor-pointer hover:text-amber-400"
+              className="hover:underline cursor-pointer hover:text-yellow-400"
+              onClick={() => navigate("allproducts")}
+            >
+              All Products
+            </li>
+            <li
+              className="hover:underline cursor-pointer hover:text-yellow-400"
               onClick={() => navigate("return-policy")}
             >
               Return Policy
             </li>
-            <li className="hover:underline cursor-pointer hover:text-amber-400">Reviews</li>
-            <li className="hover:underline cursor-pointer hover:text-amber-400">
-              <Link to={"/contact"}>Contact</Link>
+            <li
+              className="hover:underline cursor-pointer hover:text-yellow-400"
+              onClick={() => navigate("contact")}
+            >
+              Contact
             </li>
           </ul>
         </div>
@@ -114,19 +135,25 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-4">Customer Care</h3>
           <ul className="space-y-3 text-sm">
             <li className="flex items-center gap-2">
-              <MdEmail /> <a href="mailto:office@thezaphira.com">office@thezaphira.com</a>
+              <MdEmail />
+              <a href="mailto:citygeneralstore@gmail.com">
+                citygeneralstore@gmail.com
+              </a>
             </li>
-            <li className="flex items-center gap-2 hover:text-rose-600">
-              <MdPhone /> <a href="tel:+917518202507">+91-7518202507</a>
-            </li>
+
             <li className="flex items-center gap-2">
-              <MdLocationOn />{" "}
+              <MdPhone />
+              <a href="tel:+917518202507">+91-7518202507</a>
+            </li>
+
+            <li className="flex items-center gap-2">
+              <MdLocationOn />
               <a
-                href="https://www.google.com/maps?q=Zaphira Organic Farm Lucknow"
+                href="https://www.google.com/maps"
                 target="_blank"
-                rel="NoorByShayan"
+                rel="noopener noreferrer"
               >
-                Lucknow, India
+                Diuliya Dhala, Narkatiaganj
               </a>
             </li>
           </ul>
@@ -136,45 +163,46 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold mb-4">Stay Updated</h3>
           <p className="text-sm mb-4">
-            Get the latest skincare tips and exclusive offers.
+            Get latest grocery offers and special discounts directly to your email.
           </p>
+
           <input
             type="email"
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 rounded-md border border-[#19523f] bg-transparent text-white placeholder-white mb-3 focus:outline-none focus:ring-2 focus:ring-green-400"
+            className="w-full px-4 py-2 rounded-md border border-green-700 bg-transparent text-white placeholder-white mb-3 focus:outline-none focus:ring-2 focus:ring-yellow-400"
           />
+
           <button
             onClick={handleSubscribe}
-            className="w-full bg-[#3ca769] text-white hover:text-amber-300 font-medium py-2 rounded-md transition transform hover:scale-105 cursor-pointer"
+            className="w-full bg-green-600 hover:bg-green-700 font-medium py-2 rounded-md transition hover:text-yellow-300"
           >
             Subscribe
           </button>
         </div>
       </div>
 
-      {/* Footer Bottom */}
-      <div className="border-t border-[#19523f] mt-10 pt-6 flex flex-col md:flex-row items-center justify-between text-sm text-white">
+      {/* Bottom */}
+      <div className="border-t border-green-800 mt-10 pt-6 flex flex-col md:flex-row items-center justify-between text-sm">
         <p className="mb-4 md:mb-0">
-          © 2024 Pure Organic Skincare. All rights reserved.
+          © 2026 City General Store. All rights reserved.
         </p>
+
         <div className="flex space-x-6">
-          <a
+          <span
             onClick={() => navigate("privacy-policy")}
-            className="hover:underline cursor-pointer hover:text-amber-400"
+            className="hover:underline cursor-pointer hover:text-yellow-400"
           >
             Privacy Policy
-          </a>
-          <a
+          </span>
+
+          <span
             onClick={() => navigate("terms&condition")}
-            className="hover:underline cursor-pointer hover:text-amber-400"
+            className="hover:underline cursor-pointer hover:text-yellow-400"
           >
-            Terms and Conditions
-          </a>
-          <a href="#" className="hover:underline cursor-pointer hover:text-amber-400">
-            Cookie Policy
-          </a>
+            Terms & Conditions
+          </span>
         </div>
       </div>
     </footer>

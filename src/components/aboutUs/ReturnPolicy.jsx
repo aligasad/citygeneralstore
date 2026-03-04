@@ -4,130 +4,112 @@ const ReturnPolicy = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
+
   return (
     <section className="bg-[#fffaf4] text-[#2c2c2c] py-12 px-6 md:px-12 lg:px-24">
       <div className="max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#663c00]">
+        
+        <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#006b3c]">
           Return & Refund Policy
         </h2>
+
         <p className="text-lg mb-6 leading-relaxed">
-          At <span className="font-semibold">Noor By Shayan</span>, each product
-          is handcrafted with utmost care and precision using the purest organic
-          ingredients. Due to the personal and sensitive nature of skincare
-          products, and in order to maintain the highest hygiene and safety
-          standards, we follow a strict return and refund policy.
+          At <span className="font-semibold">City General Store</span>, located at 
+          <span className="font-semibold"> Diuliya Dhala, Narkatiaganj</span>, 
+          owned by <span className="font-semibold">Afzal Haroon</span>, we aim 
+          to provide quality grocery products and reliable service.  
+          Please read our return and refund policy carefully before placing an order.
         </p>
 
+        {/* Eligibility */}
         <div className="mb-8">
-          <h3 className="text-2xl font-semibold mb-3 text-[#3d2f19]">
+          <h3 className="text-2xl font-semibold mb-3 text-[#003d29]">
             🧾 Eligibility for Return/Refund:
           </h3>
           <ul className="list-disc list-inside space-y-2 text-base leading-relaxed">
             <li>
-              <span className="font-medium">Damaged or Defective Product:</span>{" "}
-              If the product is damaged during transit or found defective upon
-              delivery. Must be reported within{" "}
-              <span className="font-medium">24 hours</span> of delivery with
-              proper unboxing video and photographs as proof.
+              <span className="font-medium">Damaged Product:</span> If the product 
+              is damaged during delivery.
             </li>
             <li>
-              <span className="font-medium">Wrong Product Delivered:</span> In
-              case you receive a different product from what you ordered.
+              <span className="font-medium">Wrong Item Delivered:</span> If you 
+              receive a different item than ordered.
+            </li>
+            <li>
+              The issue must be reported within{" "}
+              <span className="font-medium">24 hours of delivery</span>.
             </li>
           </ul>
         </div>
 
+        {/* Non-Returnable */}
         <div className="mb-8">
-          <h3 className="text-2xl font-semibold mb-3 text-[#3d2f19]">
-            ❌ Non-Returnable / Non-Refundable Items:
+          <h3 className="text-2xl font-semibold mb-3 text-[#003d29]">
+            ❌ Non-Returnable Items:
           </h3>
           <ul className="list-disc list-inside space-y-2 text-base leading-relaxed">
-            <li>If the product seal is broken or packaging is opened.</li>
-            <li>If the product is used or tampered with.</li>
-            <li>
-              For reasons of personal dislike of texture, fragrance, or results
-              (as skin types vary).
-            </li>
-            <li>
-              For items bought during a sale, combo offer, or promotional
-              campaign (unless damaged or wrong item).
-            </li>
+            <li>Opened or used grocery products.</li>
+            <li>Perishable goods (milk, bread, vegetables, etc.).</li>
+            <li>Products damaged after delivery.</li>
+            <li>Items purchased during special discounts or offers (unless damaged).</li>
           </ul>
         </div>
 
+        {/* Return Procedure */}
         <div className="mb-8">
-          <h3 className="text-2xl font-semibold mb-3 text-[#3d2f19]">
+          <h3 className="text-2xl font-semibold mb-3 text-[#003d29]">
             📝 Return Procedure:
           </h3>
           <p className="mb-2">
-            To initiate a return, email us at{" "}
-            <a
-              href="mailto:support@noorbyshayan.com"
-              className="text-[#00823b] font-medium underline"
-            >
-              support@noorbyshayan.com
-            </a>{" "}
-            with your Order ID and issue details within 24 hours of receiving
-            the product.
+            To request a return, please contact us within 24 hours of delivery
+            with your Order ID and details of the issue.
           </p>
-          <p className="mb-2">Please attach:</p>
           <ul className="list-disc list-inside space-y-2 text-base">
-            <li>Unboxing video</li>
-            <li>Photos of the damaged/wrong product</li>
+            <li>Provide clear photos of the damaged or incorrect item.</li>
+            <li>Keep the product unused and in original packaging.</li>
           </ul>
           <p className="mt-2">
-            Our customer service team will guide you through the next steps
-            after reviewing your request.
+            After verification, our team will guide you regarding replacement or refund.
           </p>
         </div>
 
+        {/* Refund Process */}
         <div className="mb-8">
-          <h3 className="text-2xl font-semibold mb-3 text-[#3d2f19]">
+          <h3 className="text-2xl font-semibold mb-3 text-[#003d29]">
             💸 Refund Process:
           </h3>
           <p className="mb-2">
-            Once the return is approved and verified, the refund will be
-            processed within{" "}
-            <span className="font-medium">7–10 business days</span> to your
-            original mode of payment.
+            Once approved, refunds will be processed within{" "}
+            <span className="font-medium">3–7 business days</span> to the 
+            original payment method.
           </p>
           <p>
-            In case of Cash on Delivery (COD), refunds will be initiated to your
-            bank account after confirmation.
+            For Cash on Delivery (COD) orders, refunds will be transferred to 
+            your bank account after confirmation.
           </p>
         </div>
 
+        {/* Delivery Note */}
         <div className="mb-8">
-          <h3 className="text-2xl font-semibold mb-3 text-[#3d2f19]">
-            🧴 Note:
+          <h3 className="text-2xl font-semibold mb-3 text-[#003d29]">
+            🚚 Delivery Note:
           </h3>
           <p className="leading-relaxed">
-            As all our products are handmade, Ayurvedic, and preservative-free,
-            slight variations in color, texture, or scent are natural and do not
-            qualify as defects.
+            Home delivery is available in <strong>Diuliya, Madarsa Diuliya, and Pipra</strong> 
+            for orders above <strong>₹699</strong>. Please ensure correct address 
+            and contact details to avoid delivery issues.
           </p>
         </div>
 
+        {/* Contact */}
         <div className="border-t pt-6 text-base">
-          <p className="font-semibold mb-1">
-            For any assistance, feel free to reach us at:
+          <p className="font-semibold mb-2">
+            For any assistance, please visit:
           </p>
-          <p className="mb-1">
-            📧{" "}
-            <a
-              href="mailto:hello@noorbyshayan.in"
-              className="text-[#00823b] underline"
-            >
-              hello@noorbyshayan.in
-            </a>
-          </p>
-          <p>
-            📞{" "}
-            <a href="tel:+917518202507" className="text-[#00823b] underline">
-              +91-7518202507
-            </a>
-          </p>
+          <p>🏬 City General Store, Diuliya Dhala, Narkatiaganj</p>
+          <p>👤 Owner: Afzal Haroon</p>
         </div>
+
       </div>
     </section>
   );

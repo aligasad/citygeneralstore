@@ -43,7 +43,7 @@ function Contact({ onClose }) {
       {/* Header */}
       <div className="bg-green-700 text-white px-4 py-2 text-md font-semibold rounded-tl-2xl flex justify-between items-center">
         <div>
-          Contact Zaphira Organic Farm
+          City General Store
           <p className="text-[12px] opacity-80">We usually respond in a few hours</p>
         </div>
         <button onClick={onClose} className="text-white text-[22px] leading-none cursor-pointer hover:text-red-500"><Icon icon={'mdi:close'} /></button>
