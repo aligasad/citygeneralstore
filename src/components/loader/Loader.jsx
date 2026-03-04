@@ -1,4 +1,5 @@
 import React from "react";
+import logo from '../../assets/logo.png'
 
 function Loader() {
   return (
@@ -8,34 +9,16 @@ function Loader() {
     >
       <div className="relative flex flex-col items-center">
         {/* Animated Leaf Icon */}
-        <svg
-          className="w-16 h-16 text-green-500 animate-bounce drop-shadow-lg"
-          fill="none"
-          viewBox="0 0 48 48"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M44 4C44 4 36 44 8 44C8 44 4 24 44 4Z"
-            fill="#4ade80"
-            stroke="#22c55e"
-            strokeWidth="2"
-          />
-          <path
-            d="M20 38C20 38 24 28 36 12"
-            stroke="#166534"
-            strokeWidth="2"
-            strokeLinecap="round"
-          />
-        </svg>
+        
         {/* Subtle ring animation */}
-        <div className="absolute -inset-2 rounded-full border-2 border-green-200 animate-ping opacity-40"></div>
+        <img src={logo} alt="" className="h-14 sm:h-18 animate-bounce drop-shadow-lg" />
       </div>
       <div className="mt-8 text-center">
         <p className="text-xl font-bold text-white animate-pulse">
-          Bringing Nature to You...
+          Bringing Grocery to You...
         </p>
         <p className="text-sm text-white mt-2">
-          Please wait while we prepare your organic experience!
+          Please wait while we prepare your experience!
         </p>
       </div>
     </div>
