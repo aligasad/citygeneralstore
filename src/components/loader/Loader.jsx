@@ -11,7 +11,7 @@ function Loader() {
       <div className="relative flex items-center justify-center">
 
         {/* Rotating Ring */}
-        <div className="absolute w-35 h-35 rounded-full border-4 border-t-transparent border-emerald-400 animate-spin"></div>
+        <div className="absolute w-28 h-28 sm:w-35 sm:h-35 rounded-full border-4 border-t-transparent border-emerald-400 animate-spin"></div>
 
         {/* Glow Ring */}
         <div className="absolute w-40 h-40 rounded-full bg-emerald-400 opacity-20 blur-3xl animate-pulse"></div>
@@ -20,7 +20,7 @@ function Loader() {
         <img
           src={logo}
           alt="logo"
-          className="h-20 relative z-10 drop-shadow-2xl"
+          className=" h-17 sm:h-20 relative z-10 drop-shadow-2xl"
         />
       </div>
 
