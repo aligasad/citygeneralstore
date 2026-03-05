@@ -299,48 +299,64 @@ function MyState({ children }) {
       name: "Atta, Rice & Grains",
       slug: "atta-rice-grains",
       items: ["Aata", "Chawal", "Dal", "Besan", "Sooji", "Poha"],
+      image:
+        "https://images.herzindagi.info/image/2020/Apr/Lip-Smacking-Indian-Dish.jpg",
     },
     {
       id: 2,
       name: "Oil & Ghee",
       slug: "oil-ghee",
       items: ["Sarso Oil", "Refined Oil", "Ghee", "Vanaspati"],
+      image:
+        "https://static.toiimg.com/thumb/84068085.cms?width=680&height=512&imgsize=140499",
     },
     {
       id: 3,
       name: "Masale & Spices",
       slug: "masale-spices",
       items: ["Haldi", "Mirch", "Dhania", "Garam Masala", "Sabut Masale"],
+      image:
+        "https://isavii.com/cdn/shop/files/WhatsApp_Image_2025-07-31_at_18.29.55_1867e042.jpg?v=1754037465&width=823",
     },
     {
       id: 4,
       name: "Biscuits & Snacks",
       slug: "biscuits-snacks",
       items: ["Biscuit", "Namkeen", "Chips", "Kurkure", "Wafers"],
+      image:
+        "https://isavii.com/cdn/shop/files/WhatsApp_Image_2025-07-31_at_18.29.55_1867e042.jpg?v=1754037465&width=823",
     },
     {
       id: 5,
       name: "Tea, Coffee & Beverages",
       slug: "tea-coffee-beverages",
       items: ["Chai Patti", "Coffee", "Cold Drink", "Juice", "Sharbat"],
+      image:
+        "https://isavii.com/cdn/shop/files/WhatsApp_Image_2025-07-31_at_18.29.55_1867e042.jpg?v=1754037465&width=823",
     },
     {
       id: 6,
       name: "Dairy Products",
       slug: "dairy-products",
       items: ["Milk", "Butter", "Paneer", "Cheese", "Curd"],
+      image:
+        "https://isavii.com/cdn/shop/files/WhatsApp_Image_2025-07-31_at_18.29.55_1867e042.jpg?v=1754037465&width=823",
     },
     {
       id: 7,
       name: "Personal Care",
       slug: "personal-care",
       items: ["Soap", "Shampoo", "Toothpaste", "Hair Oil"],
+      image:
+        "https://isavii.com/cdn/shop/files/WhatsApp_Image_2025-07-31_at_18.29.55_1867e042.jpg?v=1754037465&width=823",
     },
     {
       id: 8,
       name: "Household Items",
       slug: "household-items",
       items: ["Detergent", "Dishwash", "Phenyl", "Tissue", "Matchbox"],
+      image:
+        "https://isavii.com/cdn/shop/files/WhatsApp_Image_2025-07-31_at_18.29.55_1867e042.jpg?v=1754037465&width=823",
     },
   ];
 
@@ -374,7 +390,7 @@ function MyState({ children }) {
         pageType,
         setPageType,
         calculateDiscount,
-        categories
+        categories,
       }}
     >
       {children}

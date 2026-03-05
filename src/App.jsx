@@ -25,11 +25,11 @@ import AboutUs from "./components/aboutUs/AboutUs.jsx";
 import Profile from "./components/profile/Profile.jsx";
 import CompleteProfile from "./components/profile/CompleteProfile.jsx";
 import Soap from "./pages/allproducts/Soap/Soap.jsx";
-import LipGloss from "./pages/allproducts/LipGloss/LipGloss.jsx";
+import MasaleSpices from "./pages/allproducts/MasaleSpices/MasaleSpices.jsx";
 import Shampoo from "./pages/allproducts/Shampoo/Shampoo.jsx";
-import Choclates from "./pages/allproducts/Choclates/Choclates.jsx";
+import OilGhee from "./pages/allproducts/OilGhee/OilGhee.jsx";
 import { FaArrowUp } from "react-icons/fa";
-import Candles from "./pages/allproducts/Candles/Candles.jsx";
+import AataRiceGrains from "./pages/allproducts/AataRiceGrains/AataRiceGrains.jsx";
 import { BsWhatsapp } from "react-icons/bs";
 import ReturnPolicy from "./components/aboutUs/ReturnPolicy.jsx";
 import TermsAndConditions from "./components/aboutUs/TermsAndCondition.jsx";
@@ -101,16 +101,16 @@ function App() {
           element: <Soap />,
         },
         {
-          path: "/lipgloss",
-          element: <LipGloss />,
+          path: "/masale-spices",
+          element: <MasaleSpices />,
         },
         {
-          path: "organicchocolates",
-          element: <Choclates />,
+          path: "/oil-ghee",
+          element: <OilGhee />,
         },
         {
-          path: "candles",
-          element: <Candles />,
+          path: "/atta-rice-grains",
+          element: <AataRiceGrains />,
         },
         {
           path: "/complete-profile",
@@ -165,8 +165,8 @@ function App() {
   ]);
   // For whatsapp button----------------------
   const handleWhatsAppClick = () => {
-    const phoneNumber = "917807040707";
-    const message = "Hi, I am interested in your product!";
+    const phoneNumber = "917273089956";
+    const message = "Hi, this is City General Store. I am interested in your product!";
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       message
     )}`;
@@ -235,7 +235,8 @@ const ProtectedRouteForAdmin = ({ children }) => {
 
   if (
     admin.email === "asadalam4291@gmail.com" ||
-    admin.email === "asadalamalig@gmail.com"
+    admin.email === "asadalamalig@gmail.com" ||
+    admin.email === "afzalharoon84093@gmail.com"
   ) {
     return children;
   } else {

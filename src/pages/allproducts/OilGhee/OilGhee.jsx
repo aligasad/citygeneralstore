@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { FaHeart } from "react-icons/fa6";
 import { motion } from "framer-motion";
 
-function LipGloss() {
+function Choclates() {
   const [isFirstVisit, setIsFirstVisit] = useState(true);
   const context = useData();
   const {
@@ -19,6 +19,7 @@ function LipGloss() {
     filterPrice,
     setFilterPrice,
     calcOffer,
+    calculateDiscount,
   } = context;
 
   const dispatch = useDispatch();
@@ -68,7 +69,7 @@ function LipGloss() {
                 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900"
                 style={{ color: mode === "dark" ? "white" : "" }}
               >
-                Lip Gloss Collection
+                Oil & Ghee !
               </h1>
               <div class="h-1 w-25 bg-green-700 rounded"></div>
             </div>
@@ -76,21 +77,21 @@ function LipGloss() {
             <div className="flex flex-wrap -m-4">
               {product
                 .filter((obj) =>
-                  obj.type
+                  obj.category
                     .toLowerCase()
                     .replace(/\s+/g, "")
-                    .includes("lipgloss")
+                    .includes("oil"),
                 )
                 .filter(
                   (obj) =>
                     obj.title.toLowerCase().includes(searchkey) ||
-                    obj.type.toLowerCase().includes(searchkey)
+                    obj.type.toLowerCase().includes(searchkey),
                 )
                 .filter((item) =>
                   item.category
                     .replace(/\s+/g, "")
                     .toLowerCase()
-                    .includes(filterType)
+                    .includes(filterType),
                 )
                 .map((item, index) => {
                   const {
@@ -102,7 +103,7 @@ function LipGloss() {
                     stock,
                     isNew,
                     quantity,
-                    imageUrl,
+                    images,
                     id,
                   } = item;
                   return (
@@ -127,30 +128,33 @@ function LipGloss() {
                             color: mode === "dark" ? "#FFFFFF" : "#000000",
                           }}
                         >
-                          <div className="flex justify-center items-center p-4 bg-white rounded-t-lg border-2 border-b-0 border-[#003d29] relative">
+                          <div className="flex justify-center items-center p-4 bg-white rounded-t-lg border-2 border-b-0 border-[#195f48] relative">
                             {stock > 0 ? (
-                              <p className=" absolute bottom-0 left-0 bg-green-700 px-2 rounded-tr-lg text-[10px] sm:text-[13px] text-white font-semibold z-10 ">
+                              <p className=" absolute bottom-0 left-0 bg-green-700 px-2 rounded-tr-lg text-[10px] sm:text-[12px] text-white font-semibold z-10 ">
                                 On Sale
                               </p>
                             ) : (
-                              <p className=" absolute bottom-0 left-0 bg-[#b35d52] px-2 rounded-tr-lg text-[10px] sm:text-[13px] text-white font-semibold z-10 ">
+                              <p className=" absolute bottom-0 left-0 bg-[#b35d52] px-2 rounded-tr-lg text-[10px] sm:text-[12px] text-white font-semibold z-10 ">
                                 Sold Out
                               </p>
                             )}
-                            {isNew ? (
-                              <p className="absolute bottom-0 right-0 px-3 text-[13px] text-white font-semibold z-10 bg-black rounded-tl-lg">
+                            {calculateDiscount(originalPrice, price) > 30 ? (
+                              <p className="absolute bottom-0 right-0 px-3 text-[12px] text-rose-600 font-semibold z-10 border-t border-l bg-rose-200 rounded-tl-lg">
+                                {" "}
+                                Hot Deal{" "}
+                              </p>
+                            ) : (
+                              <p className="absolute bottom-0 right-0 px-3 text-[12px] text-white font-semibold z-10 bg-black rounded-tl-lg">
                                 {" "}
                                 New{" "}
                               </p>
-                            ) : (
-                              ""
                             )}
                             <img
                               onClick={() =>
                                 (window.location.href = `/productinfo/${id}`)
                               }
                               className="h-36 sm:h-44 object-contain transition-transform rounded-md duration-300 hover:scale-110 cursor-pointer"
-                              src={imageUrl}
+                              src={images[0]}
                               alt={title}
                             />
                           </div>
@@ -169,35 +173,26 @@ function LipGloss() {
                             <hr className="text-white mt-[3px]" />
                             <div className="flex items-baseline gap-1">
                               <p className="text-[14px] md:text-base font-bold text-red-600 mt-1">
-                                ${price}
+                                ₹{price}
                               </p>
                               <p className="text-[12px] md:text-[13px] sm:ml-1 font-semibold text-gray-100 line-through">
-                                ${originalPrice}
+                                ₹{originalPrice}
                               </p>
                             </div>
 
                             <div className="flex items-center justify-between mt-2 w-[70%] sm:w-[55%]">
-                              {stock > 0 ? (
-                                <button
-                                  onClick={() => toggleCart(item)}
-                                  className={`px-3 h-8 sm:h-9 sm:w-27 sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-sm transition duration-200 hover:shadow-sm hover:shadow-gray-900 cursor-pointer ${
-                                    cartItems.some((p) => p.id === item.id)
-                                      ? "bg-red-700 text-white"
-                                      : "bg-[#439373] hover:text-white"
-                                  }`}
-                                >
-                                  {cartItems.some((p) => p.id === item.id)
-                                    ? "Remove"
-                                    : "Add to Cart"}
-                                </button>
-                              ) : (
-                                <button
-                                  disabled
-                                  className="px-3 h-8 sm:h-9 sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-sm text-white bg-[#b35d52] cursor-not-allowed"
-                                >
-                                  Out of Stock
-                                </button>
-                              )}
+                              <button
+                                onClick={() => toggleCart(item)}
+                                className={`px-3 h-8 sm:h-9 sm:w-27 sm:py-2 mr-2 text-[12px] md:text-sm font-semibold rounded-sm transition duration-200 hover:shadow-sm hover:shadow-gray-900 cursor-pointer ${
+                                  cartItems.some((p) => p.id === item.id)
+                                    ? "bg-red-700 text-white"
+                                    : "bg-[#439373] hover:text-white"
+                                }`}
+                              >
+                                {cartItems.some((p) => p.id === item.id)
+                                  ? "Remove"
+                                  : "Add to Cart"}
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -213,4 +208,4 @@ function LipGloss() {
   );
 }
 
-export default LipGloss;
+export default Choclates;

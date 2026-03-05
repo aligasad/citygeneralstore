@@ -32,7 +32,7 @@ import { onAuthStateChanged } from "firebase/auth";
 
 function Navbar() {
   const navigate = useNavigate();
-  const profile = JSON.parse(localStorage.getItem('profile'));
+  const profile = JSON.parse(localStorage.getItem("profile"));
   const context = useData();
   const {
     mode,
@@ -48,6 +48,7 @@ function Navbar() {
     resetFilter,
     pageType,
     setPageType,
+    categories,
   } = context;
 
   console.log("PAGE TYPE", pageType);
@@ -140,7 +141,6 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [searchBarOpen, setSearchBarOpen] = useState(false); // <-- Add this line
-
 
   return (
     <div className="bg-[#dfe3d6] sticky top-0 z-50 shadow-md">
@@ -261,66 +261,19 @@ function Navbar() {
                       >
                         All Products
                       </li>
-                      <li
-                        onClick={() => {
-                          (handleSelect("/serum"),
-                            setIsOpen(false),
-                            setMenuOpen(false));
-                        }}
-                        className="hover:underline hover:cursor-pointer"
-                      >
-                        Serum
-                      </li>
-                      <li
-                        onClick={() => {
-                          (handleSelect("/shampoo"),
-                            setIsOpen(false),
-                            setMenuOpen(false));
-                        }}
-                        className="hover:underline hover:cursor-pointer"
-                      >
-                        Shampoo
-                      </li>
-                      <li
-                        onClick={() => {
-                          (handleSelect("/soap"),
-                            setIsOpen(false),
-                            setMenuOpen(false));
-                        }}
-                        className="hover:underline hover:cursor-pointer"
-                      >
-                        Soap
-                      </li>
-                      <li
-                        onClick={() => {
-                          (handleSelect("/lipgloss"),
-                            setIsOpen(false),
-                            setMenuOpen(false));
-                        }}
-                        className="hover:underline hover:cursor-pointer"
-                      >
-                        Lip Gloss
-                      </li>
-                      <li
-                        onClick={() => {
-                          (handleSelect("/organicchocolates"),
-                            setIsOpen(false),
-                            setMenuOpen(false));
-                        }}
-                        className="hover:underline hover:cursor-pointer"
-                      >
-                        Choclates
-                      </li>
-                      <li
-                        onClick={() => {
-                          (handleSelect("/candles"),
-                            setIsOpen(false),
-                            setMenuOpen(false));
-                        }}
-                        className="hover:underline hover:cursor-pointer"
-                      >
-                        Candles
-                      </li>
+                      {categories.map((category, index) => (
+                        <li
+                          key={index}
+                          onClick={() => {
+                            handleSelect(`/${category.slug}`);
+                            setIsOpen(false);
+                            setMenuOpen(false);
+                          }}
+                          className="hover:underline hover:cursor-pointer line-clamp-1 "
+                        >
+                          {category.name}
+                        </li>
+                      ))}
                     </ul>
                   )}
                 </div>
@@ -345,8 +298,8 @@ function Navbar() {
                   About
                 </Link>
               </li>
-              {user?.user?.email === "asadalam4291@gmail.com" ||
-                (user?.user?.email === "asadalamalig@gmail.com" && (
+              {user?.email === "asadalam4291@gmail.com" ||
+                (user?.email === "asadalamalig@gmail.com" && (
                   <li>
                     <Link
                       to="/dashboard"
@@ -400,125 +353,84 @@ function Navbar() {
             className="text-2xl font-bold text-green-700"
           >
             <div className="">
-              <img src={logo} alt="Logo" className="w-14 h-auto rounded" />
+              <img
+                src={logo}
+                alt="Logo"
+                className="w-16 sm:w-14 h-auto rounded"
+              />
             </div>
           </Link>
-          <nav className="hidden md:flex gap-6 text-sm text-[#003d29]">
-            <Link to="/" className="hover:text-green-700 font-bold">
-              Home
-            </Link>
+          <Link to="/" className="hover:text-green-700 font-bold">
+            Home
+          </Link>
 
-            <div className="relative inline-block text-left" ref={productRef}>
-              <button
-                data-dropdown="product"
-                onClick={() => {
-                  setIsProductDropdownOpen(!isProductDropdownOpen);
-                  setIsDropdownOpen(false); // Close the other if open
-                }}
-                className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b] cursor-pointer transition"
-              >
-                Products{" "}
-                {isProductDropdownOpen ? (
-                  <ChevronUp size={16} className="cursor-pointer" />
-                ) : (
-                  <ChevronDown size={16} className="cursor-pointer" />
-                )}
-              </button>
-
-              {isProductDropdownOpen && (
-                <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
-                  <li
-                    onClick={() => {
-                      (handleSelect("/allproducts"),
-                        setIsProductDropdownOpen(false),
-                        setMenuOpen(false));
-                    }}
-                    className="hover:underline hover:cursor-pointer"
-                  >
-                    All Products
-                  </li>
-                  <li
-                    onClick={() => {
-                      (handleSelect("/serum"),
-                        setIsOpen(false),
-                        setMenuOpen(false));
-                    }}
-                    className="hover:underline hover:cursor-pointer"
-                  >
-                    Serum
-                  </li>
-                  <li
-                    onClick={() => {
-                      (handleSelect("/shampoo"),
-                        setIsOpen(false),
-                        setMenuOpen(false));
-                    }}
-                    className="hover:underline hover:cursor-pointer"
-                  >
-                    Shampoo
-                  </li>
-                  <li
-                    onClick={() => {
-                      (handleSelect("/soap"),
-                        setIsOpen(false),
-                        setMenuOpen(false));
-                    }}
-                    className="hover:underline hover:cursor-pointer"
-                  >
-                    Soap
-                  </li>
-                  <li
-                    onClick={() => {
-                      (handleSelect("/lipgloss"),
-                        setIsOpen(false),
-                        setMenuOpen(false));
-                    }}
-                    className="hover:underline hover:cursor-pointer"
-                  >
-                    Lip Gloss
-                  </li>
-                  <li
-                    onClick={() => {
-                      (handleSelect("/organicchocolates"),
-                        setIsOpen(false),
-                        setMenuOpen(false));
-                    }}
-                    className="hover:underline hover:cursor-pointer"
-                  >
-                    Choclates
-                  </li>
-                  <li
-                    onClick={() => {
-                      (handleSelect("/candles"),
-                        setIsOpen(false),
-                        setMenuOpen(false));
-                    }}
-                    className="hover:underline hover:cursor-pointer"
-                  >
-                    Candles
-                  </li>
-                </ul>
+          <div className="relative inline-block text-left" ref={productRef}>
+            <button
+              data-dropdown="product"
+              onClick={() => {
+                setIsProductDropdownOpen(!isProductDropdownOpen);
+                setIsDropdownOpen(false); // Close the other if open
+              }}
+              className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b] cursor-pointer transition"
+            >
+              Products{" "}
+              {isProductDropdownOpen ? (
+                <ChevronUp size={16} className="cursor-pointer" />
+              ) : (
+                <ChevronDown size={16} className="cursor-pointer" />
               )}
-            </div>
+            </button>
 
-            <Link to={"/orders"} className="hover:text-green-700 font-bold">
-              Orders
+            {isProductDropdownOpen && (
+              <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
+                <li
+                  onClick={() => {
+                    (handleSelect("/allproducts"),
+                      setIsProductDropdownOpen(false),
+                      setMenuOpen(false));
+                  }}
+                  className="hover:underline hover:cursor-pointer"
+                >
+                  All Products
+                </li>
+
+                {categories.map((category, index) => (
+                  <li
+                    key={index}
+                    onClick={() => {
+                      handleSelect(`/${category.slug}`);
+                      setIsOpen(false);
+                      setMenuOpen(false);
+                    }}
+                    className="hover:underline hover:cursor-pointer line-clamp-1 "
+                  >
+                    {category.name}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          <Link to={"/orders"} className="hover:text-green-700 font-bold">
+            Orders
+          </Link>
+          <Link to="/about" className="hover:text-green-700 font-bold">
+            About
+          </Link>
+          {(user?.email === "afzalharoon84093@gmail.com" && (
+            <Link to="/dashboard" className="text-red-600 font-bold">
+              Admin
             </Link>
-            <Link to="/about" className="hover:text-green-700 font-bold">
-              About
-            </Link>
-            {user?.email === "asadalam4291@gmail.com" ||
-              (user?.email === "asadalamalig@gmail.com" && (
-                <Link to="/dashboard" className="text-red-600 font-bold">
-                  Admin
-                </Link>
-              ))}
-          </nav>
+          )) ||
+            (user?.email === "asadalamalig@gmail.com" && (
+              <Link to="/dashboard" className="text-red-600 font-bold">
+                Admin
+              </Link>
+            ))}
         </div>
 
         {/* Right Icons */}
         <div className="flex items-center gap-8">
-
           {/* Search Icon/Input on Large Screens */}
           <div className="relative hidden sm:flex items-center">
             {!searchBarOpen ? (
@@ -563,7 +475,6 @@ function Navbar() {
                   }
                   alt="Profile"
                   className="w-10 h-10 rounded-full object-cover object-top border-1 border-[#03A6A1] cursor-pointer"
-                  
                 />
               </button>
 
@@ -605,7 +516,7 @@ function Navbar() {
               </p>
             </Link>
           )}
-          
+
           <Link
             to="/cart"
             className="relative flex items-center text-sm hover:text-[#3a9a72] font-bold "
