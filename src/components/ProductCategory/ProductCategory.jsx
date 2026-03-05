@@ -3,30 +3,40 @@ import { motion } from "framer-motion";
 
 const categories = [
   {
-    name: "Serum",
+    name: "Household Items",
     image:
       "https://i.ibb.co/FLyGmGsP/Chat-GPT-Image-Jul-26-2025-03-44-48-PM.png",
   },
   {
-    name: "Shampoo",
+    name: "Personal Care",
     image: "https://i.ibb.co/Xx4s86fB/neem-Shampoo.jpg",
   },
   {
-    name: "Soap",
+    name: "Dairy Products",
     image: "https://i.ibb.co/0jHJzYV9/soap1.png",
   },
   {
-    name: "Lip Gloss",
+    name: "Tea Coffe & Beverage",
     image:
       "https://4j1nka-ys.myshopify.com/cdn/shop/files/Copilot_20250729_185249.png?v=1753795419&width=713",
   },
   {
-    name: "Organic Chocolates",
+    name: "Biscuits & Snacks",
     image:
       "https://cdn11.bigcommerce.com/s-oyt6pom1dt/images/stencil/1024x1024/uploaded_images/almond-butter-crunch-menu.jpg",
   },
   {
-    name: "Candles",
+    name: "Masale & Spices",
+    image:
+      "https://isavii.com/cdn/shop/files/WhatsApp_Image_2025-07-31_at_18.29.55_1867e042.jpg?v=1754037465&width=823",
+  },
+  {
+    name: "Oil & Ghee",
+    image:
+      "https://isavii.com/cdn/shop/files/WhatsApp_Image_2025-07-31_at_18.29.55_1867e042.jpg?v=1754037465&width=823",
+  },
+  {
+    name: "Aata, Rice & Grains",
     image:
       "https://isavii.com/cdn/shop/files/WhatsApp_Image_2025-07-31_at_18.29.55_1867e042.jpg?v=1754037465&width=823",
   },

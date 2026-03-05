@@ -3,7 +3,7 @@ import { useData } from "../../../context/data/MyState";
 
 function UpdateProduct() {
   const context = useData(); // custom hook
-  const { products, setProducts, updateProduct } = context;
+  const { products, setProducts, updateProduct, categories } = context;
   const [loading, setLoading] = useState(false);
   // got to top
   useEffect(() => {
@@ -150,26 +150,61 @@ function UpdateProduct() {
                 }
               />
 
-              <input
-                type="text"
-                name="category"
-                className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-                placeholder="Category"
-                value={products.category}
+              {/* Preview Images */}
+              <div className="grid grid-cols-3 gap-2">
+                {products.images?.map((img, index) => (
+                  <img
+                    key={index}
+                    src={img}
+                    alt="product"
+                    className="w-full h-20 object-cover rounded"
+                  />
+                ))}
+              </div>
+              {/* Category */}
+              <select
+                value={products.category || ""}
                 onChange={(e) =>
-                  setProducts({ ...products, category: e.target.value })
+                  setProducts({
+                    ...products,
+                    category: e.target.value,
+                    type: "",
+                  })
                 }
-              />
-              <input
-                type="text"
-                name="type"
-                className="bg-green-50 border border-green-200 px-4 py-2 rounded-lg text-gray-800 placeholder:text-green-400 outline-none focus:ring-2 focus:ring-green-300"
-                placeholder="Type"
-                value={products.type}
+                className="input"
+              >
+                <option value="">Select Category</option>
+
+                {categories.map((category) => (
+                  <option key={category.id} value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+              {/* Type */}
+              <select
+                value={products.type || ""}
+                disabled={!products.category}
                 onChange={(e) =>
-                  setProducts({ ...products, type: e.target.value })
+                  setProducts({
+                    ...products,
+                    type: e.target.value,
+                  })
                 }
-              />
+                className="input"
+              >
+                <option value="">Select Type</option>
+
+                {products.category &&
+                  categories
+                    .find((cat) => cat.name === products.category)
+                    ?.items.map((type) => (
+                      <option key={type} value={type}>
+                        {type}
+                      </option>
+                    ))}
+              </select>
+
               <textarea
                 cols="30"
                 rows="4"

@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "../../assets/logo.png";
 
 function Loader() {
+  useEffect(()=> {
+    window.scrollTo({top: 0, behavior: "smooth"});
+  }, [])
   return (
     <div
       role="status"

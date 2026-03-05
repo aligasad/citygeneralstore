@@ -83,7 +83,7 @@ function MyState({ children }) {
       const q = query(
         collection(firebaseDB, "products"),
         //It returns data after sorting according to its time
-        orderBy("time")
+        orderBy("time"),
       );
 
       const data = onSnapshot(q, (QuerySnapshot) => {
@@ -161,25 +161,25 @@ function MyState({ children }) {
   //   }
   // };
   const getOrderData = async () => {
-  setLoading(true);
-  try {
-    const result = await getDocs(collection(firebaseDB, "orders"));
-    const ordersArray = [];
-    result.forEach((docSnap) => {
-      ordersArray.push({
-        id: docSnap.id,   // ✅ Firebase document id include
-        ...docSnap.data() // ✅ baaki data spread
+    setLoading(true);
+    try {
+      const result = await getDocs(collection(firebaseDB, "orders"));
+      const ordersArray = [];
+      result.forEach((docSnap) => {
+        ordersArray.push({
+          id: docSnap.id, // ✅ Firebase document id include
+          ...docSnap.data(), // ✅ baaki data spread
+        });
       });
-    });
 
-    setOrder(ordersArray);
-    console.log("Orders:", ordersArray);
-    setLoading(false);
-  } catch (error) {
-    console.log("Error fetching orders:", error);
-    setLoading(false);
-  }
-};
+      setOrder(ordersArray);
+      console.log("Orders:", ordersArray);
+      setLoading(false);
+    } catch (error) {
+      console.log("Error fetching orders:", error);
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     getOrderData();
@@ -225,7 +225,7 @@ function MyState({ children }) {
           setLocation({ lat: latitude, lon: longitude });
           // Reverse geocode
           fetch(
-            `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${API_KEY}`
+            `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${API_KEY}`,
           )
             .then((response) => response.json())
             .then((data) => {
@@ -246,7 +246,7 @@ function MyState({ children }) {
           enableHighAccuracy: true,
           timeout: 10000,
           maximumAge: 0,
-        }
+        },
       );
     } else {
       setError("Geolocation is not supported by your browser.");
@@ -292,7 +292,57 @@ function MyState({ children }) {
     return discount.toFixed(2);
   }
 
-
+  // -------------------CATEGORY---------------------
+  const categories = [
+    {
+      id: 1,
+      name: "Atta, Rice & Grains",
+      slug: "atta-rice-grains",
+      items: ["Aata", "Chawal", "Dal", "Besan", "Sooji", "Poha"],
+    },
+    {
+      id: 2,
+      name: "Oil & Ghee",
+      slug: "oil-ghee",
+      items: ["Sarso Oil", "Refined Oil", "Ghee", "Vanaspati"],
+    },
+    {
+      id: 3,
+      name: "Masale & Spices",
+      slug: "masale-spices",
+      items: ["Haldi", "Mirch", "Dhania", "Garam Masala", "Sabut Masale"],
+    },
+    {
+      id: 4,
+      name: "Biscuits & Snacks",
+      slug: "biscuits-snacks",
+      items: ["Biscuit", "Namkeen", "Chips", "Kurkure", "Wafers"],
+    },
+    {
+      id: 5,
+      name: "Tea, Coffee & Beverages",
+      slug: "tea-coffee-beverages",
+      items: ["Chai Patti", "Coffee", "Cold Drink", "Juice", "Sharbat"],
+    },
+    {
+      id: 6,
+      name: "Dairy Products",
+      slug: "dairy-products",
+      items: ["Milk", "Butter", "Paneer", "Cheese", "Curd"],
+    },
+    {
+      id: 7,
+      name: "Personal Care",
+      slug: "personal-care",
+      items: ["Soap", "Shampoo", "Toothpaste", "Hair Oil"],
+    },
+    {
+      id: 8,
+      name: "Household Items",
+      slug: "household-items",
+      items: ["Detergent", "Dishwash", "Phenyl", "Tissue", "Matchbox"],
+    },
+  ];
 
   return (
     <MyContext.Provider
@@ -324,6 +374,7 @@ function MyState({ children }) {
         pageType,
         setPageType,
         calculateDiscount,
+        categories
       }}
     >
       {children}

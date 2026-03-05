@@ -5,6 +5,13 @@
 @import "slick-carousel/slick/slick-theme.css";
 
 
+.input {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 10px;
+  border-radius: 8px;
+}
+
 @keyframes bgPulse {
   0%, 100% {
     background-color: #ff2f28b2;

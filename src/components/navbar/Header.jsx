@@ -25,12 +25,14 @@ import {
 } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
-import { auth } from "../../firebase/FirebaseConfig";
+import { auth, firebaseDB } from "../../firebase/FirebaseConfig";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { onAuthStateChanged } from "firebase/auth";
 
 function Navbar() {
   const navigate = useNavigate();
+  const profile = JSON.parse(localStorage.getItem('profile'));
   const context = useData();
   const {
     mode,
@@ -138,6 +140,7 @@ function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [searchBarOpen, setSearchBarOpen] = useState(false); // <-- Add this line
+
 
   return (
     <div className="bg-[#dfe3d6] sticky top-0 z-50 shadow-md">
@@ -250,9 +253,9 @@ function Navbar() {
                     <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
                       <li
                         onClick={() => {
-                          handleSelect("/allproducts"),
+                          (handleSelect("/allproducts"),
                             setIsProductDropdownOpen(false),
-                            setMenuOpen(false);
+                            setMenuOpen(false));
                         }}
                         className="hover:underline hover:cursor-pointer"
                       >
@@ -260,9 +263,9 @@ function Navbar() {
                       </li>
                       <li
                         onClick={() => {
-                          handleSelect("/serum"),
+                          (handleSelect("/serum"),
                             setIsOpen(false),
-                            setMenuOpen(false);
+                            setMenuOpen(false));
                         }}
                         className="hover:underline hover:cursor-pointer"
                       >
@@ -270,9 +273,9 @@ function Navbar() {
                       </li>
                       <li
                         onClick={() => {
-                          handleSelect("/shampoo"),
+                          (handleSelect("/shampoo"),
                             setIsOpen(false),
-                            setMenuOpen(false);
+                            setMenuOpen(false));
                         }}
                         className="hover:underline hover:cursor-pointer"
                       >
@@ -280,9 +283,9 @@ function Navbar() {
                       </li>
                       <li
                         onClick={() => {
-                          handleSelect("/soap"),
+                          (handleSelect("/soap"),
                             setIsOpen(false),
-                            setMenuOpen(false);
+                            setMenuOpen(false));
                         }}
                         className="hover:underline hover:cursor-pointer"
                       >
@@ -290,9 +293,9 @@ function Navbar() {
                       </li>
                       <li
                         onClick={() => {
-                          handleSelect("/lipgloss"),
+                          (handleSelect("/lipgloss"),
                             setIsOpen(false),
-                            setMenuOpen(false);
+                            setMenuOpen(false));
                         }}
                         className="hover:underline hover:cursor-pointer"
                       >
@@ -300,9 +303,9 @@ function Navbar() {
                       </li>
                       <li
                         onClick={() => {
-                          handleSelect("/organicchocolates"),
+                          (handleSelect("/organicchocolates"),
                             setIsOpen(false),
-                            setMenuOpen(false);
+                            setMenuOpen(false));
                         }}
                         className="hover:underline hover:cursor-pointer"
                       >
@@ -310,9 +313,9 @@ function Navbar() {
                       </li>
                       <li
                         onClick={() => {
-                          handleSelect("/candles"),
+                          (handleSelect("/candles"),
                             setIsOpen(false),
-                            setMenuOpen(false);
+                            setMenuOpen(false));
                         }}
                         className="hover:underline hover:cursor-pointer"
                       >
@@ -426,9 +429,9 @@ function Navbar() {
                 <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
                   <li
                     onClick={() => {
-                      handleSelect("/allproducts"),
+                      (handleSelect("/allproducts"),
                         setIsProductDropdownOpen(false),
-                        setMenuOpen(false);
+                        setMenuOpen(false));
                     }}
                     className="hover:underline hover:cursor-pointer"
                   >
@@ -436,9 +439,9 @@ function Navbar() {
                   </li>
                   <li
                     onClick={() => {
-                      handleSelect("/serum"),
+                      (handleSelect("/serum"),
                         setIsOpen(false),
-                        setMenuOpen(false);
+                        setMenuOpen(false));
                     }}
                     className="hover:underline hover:cursor-pointer"
                   >
@@ -446,9 +449,9 @@ function Navbar() {
                   </li>
                   <li
                     onClick={() => {
-                      handleSelect("/shampoo"),
+                      (handleSelect("/shampoo"),
                         setIsOpen(false),
-                        setMenuOpen(false);
+                        setMenuOpen(false));
                     }}
                     className="hover:underline hover:cursor-pointer"
                   >
@@ -456,9 +459,9 @@ function Navbar() {
                   </li>
                   <li
                     onClick={() => {
-                      handleSelect("/soap"),
+                      (handleSelect("/soap"),
                         setIsOpen(false),
-                        setMenuOpen(false);
+                        setMenuOpen(false));
                     }}
                     className="hover:underline hover:cursor-pointer"
                   >
@@ -466,9 +469,9 @@ function Navbar() {
                   </li>
                   <li
                     onClick={() => {
-                      handleSelect("/lipgloss"),
+                      (handleSelect("/lipgloss"),
                         setIsOpen(false),
-                        setMenuOpen(false);
+                        setMenuOpen(false));
                     }}
                     className="hover:underline hover:cursor-pointer"
                   >
@@ -476,9 +479,9 @@ function Navbar() {
                   </li>
                   <li
                     onClick={() => {
-                      handleSelect("/organicchocolates"),
+                      (handleSelect("/organicchocolates"),
                         setIsOpen(false),
-                        setMenuOpen(false);
+                        setMenuOpen(false));
                     }}
                     className="hover:underline hover:cursor-pointer"
                   >
@@ -486,9 +489,9 @@ function Navbar() {
                   </li>
                   <li
                     onClick={() => {
-                      handleSelect("/candles"),
+                      (handleSelect("/candles"),
                         setIsOpen(false),
-                        setMenuOpen(false);
+                        setMenuOpen(false));
                     }}
                     className="hover:underline hover:cursor-pointer"
                   >
@@ -504,8 +507,8 @@ function Navbar() {
             <Link to="/about" className="hover:text-green-700 font-bold">
               About
             </Link>
-            {user?.user?.email === "asadalam4291@gmail.com" ||
-              (user?.user?.email === "asadalamalig@gmail.com" && (
+            {user?.email === "asadalam4291@gmail.com" ||
+              (user?.email === "asadalamalig@gmail.com" && (
                 <Link to="/dashboard" className="text-red-600 font-bold">
                   Admin
                 </Link>
@@ -515,10 +518,6 @@ function Navbar() {
 
         {/* Right Icons */}
         <div className="flex items-center gap-8">
-          {/* Theme Toggle */}
-          {/* <button onClick={toggleMode} className="text-xl">
-            {mode === "dark" ? <BsFillCloudSunFill /> : <FiSun />}
-          </button> */}
 
           {/* Search Icon/Input on Large Screens */}
           <div className="relative hidden sm:flex items-center">
@@ -546,54 +545,54 @@ function Navbar() {
             )}
           </div>
 
+          {/* Profile/Login */}
           {user ? (
-            <button
-              title="Logout"
-              className="flex items-center gap-1 cursor-pointer hover:text-[#449474] "
-            >
-              <div className="relative inline-block text-left">
-                <div ref={userRef} className="relative">
-                  <button
-                    data-dropdown="user"
-                    onClick={() => {
-                      setIsUserDropdownOpen(!isUserDropdownOpen); // 👈 toggle
-                      setMenuOpen(false); // agar koi aur menu open hai to close
-                    }}
-                    className="flex items-center gap-1 text-[#003d29] font-bold hover:text-[#00823b] cursor-pointer transition"
-                  >
-                    Profile{" "}
-                    {isUserDropdownOpen ? (
-                      <ChevronUp size={16} className="cursor-pointer" />
-                    ) : (
-                      <ChevronDown size={16} className="cursor-pointer" />
-                    )}
-                  </button>
+            <div className="relative inline-block text-left" ref={userRef}>
+              <button
+                data-dropdown="user"
+                onClick={() => {
+                  setIsUserDropdownOpen(!isUserDropdownOpen);
+                  setMenuOpen(false);
+                }}
+                className="flex items-center gap-1 text-[#FF4F0F] font-bold hover:text-[#03A6A1] transition cursor-pointer"
+              >
+                <img
+                  src={
+                    profile?.photoURL ||
+                    "https://ui-avatars.com/api/?name=" + user.email
+                  }
+                  alt="Profile"
+                  className="w-10 h-10 rounded-full object-cover object-top border-1 border-[#03A6A1] cursor-pointer"
+                  
+                />
+              </button>
 
-                  {isUserDropdownOpen && (
-                    <ul className="absolute mt-3 bg-[#fff8f3] text-gray-800 shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
-                      <li
-                        onClick={() => {
-                          handleSelect("/profile");
-                          setIsUserDropdownOpen(false); // select ke baad close
-                        }}
-                        className="hover:underline hover:cursor-pointer"
-                      >
-                        Profile
-                      </li>
-                      <li
-                        onClick={() => {
-                          handleLogout();
-                          setIsUserDropdownOpen(false); // logout ke baad bhi close
-                        }}
-                        className="hover:underline hover:cursor-pointer"
-                      >
-                        Logout
-                      </li>
-                    </ul>
-                  )}
-                </div>
-              </div>
-            </button>
+              {isUserDropdownOpen && (
+                <ul className="absolute mt-3 right-0 bg-[#FFE3BB] text-[#03A6A1] shadow-lg rounded-xl py-2 px-4 z-50 min-w-[160px] space-y-2">
+                  <li
+                    onClick={() => handleSelect("/profile")}
+                    className="hover:text-[#FF4F0F] cursor-pointer flex items-center gap-1"
+                  >
+                    <img
+                      src={
+                        profile?.photoURL ||
+                        "https://ui-avatars.com/api/?name=" + user.email
+                      }
+                      alt="Profile"
+                      className="w-5 h-5 rounded-full object-cover object-top border border-[#03A6A1] cursor-pointer"
+                    />
+                    Profile
+                  </li>
+                  <li
+                    onClick={handleLogout}
+                    className="hover:text-[#FF4F0F] cursor-pointer flex items-center gap-1"
+                  >
+                    <IoLogOut size={20} />
+                    Logout
+                  </li>
+                </ul>
+              )}
+            </div>
           ) : (
             <Link
               to="/login"
@@ -606,6 +605,7 @@ function Navbar() {
               </p>
             </Link>
           )}
+          
           <Link
             to="/cart"
             className="relative flex items-center text-sm hover:text-[#3a9a72] font-bold "

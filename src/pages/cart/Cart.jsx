@@ -304,7 +304,7 @@ function Cart() {
                         {Number(quan) > 1
                           ? `${Number(quan)} items`
                           : `${Number(quan)} item`}{" "}
-                        / <span>Total Price: </span> $
+                        / <span>Total Price: </span> ₹ {" "}
                         {Number(item.quan) * Number(item.price)}
                       </p>
                     </div>
@@ -359,7 +359,7 @@ function Cart() {
               <span className="flex items-center font-medium text-semibold">
                 <span className="flex items-center mr-0.5 text-gray-700">
                   {" "}
-                  ${" "}
+                  ₹{" "}
                 </span>{" "}
                 {totalAmount.toFixed(2)}
               </span>
@@ -372,7 +372,7 @@ function Cart() {
               <span className="flex items-center font-medium text-semibold">
                 <span className="flex items-center mr-0.5 text-gray-900">
                   {" "}
-                  ${" "}
+                  ₹{" "}
                 </span>{" "}
                 {totalAmount > 60 ? "0.00" : shipping.toFixed(2)}
               </span>
@@ -381,7 +381,7 @@ function Cart() {
             <div className="flex justify-between text-base font-bold">
               <span>Grand Total</span>
               <span className="flex items-center text-gray-700">
-                <span className="text-gray-800 mr-1">$</span>
+                <span className="text-gray-800 mr-1">₹</span>
                 {grandTotal}
               </span>
             </div>

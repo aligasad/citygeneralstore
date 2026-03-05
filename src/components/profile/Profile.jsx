@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut, updatePassword } from "firebase/auth";
 import { firebaseDB, auth } from "../../firebase/FirebaseConfig";
 
 function Profile() {
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  useEffect(()=> {
+    window.scrollTo({top:0, behavior: "smooth"});
+  }, []);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
@@ -17,6 +25,10 @@ function Profile() {
           const docSnap = await getDoc(docRef);
           if (docSnap.exists()) {
             setUserData(docSnap.data());
+            const data = docSnap.data();
+            setUserData(data);
+            // ⭐ header ke liye save karo
+            localStorage.setItem("profile", JSON.stringify(data));
           } else {
             // fallback from auth
             setUserData({
@@ -55,6 +67,41 @@ function Profile() {
     );
   }
 
+  // Update Password
+  const handleUpdatePassword = async () => {
+    if (!newPassword || !confirmPassword) {
+      return alert("Please fill all fields");
+    }
+
+    if (newPassword !== confirmPassword) {
+      return alert("Passwords do not match");
+    }
+
+    if (newPassword.length < 6) {
+      return alert("Password must be at least 6 characters");
+    }
+
+    try {
+      const user = auth.currentUser;
+
+      await updatePassword(user, newPassword);
+
+      alert("Password updated successfully ✅");
+
+      setNewPassword("");
+      setConfirmPassword("");
+      setShowPasswordForm(false);
+    } catch (error) {
+      if (error.code === "auth/requires-recent-login") {
+        alert("Please logout and login again before changing password.");
+      } else {
+        alert(error.message);
+      }
+    }
+  };
+
+  
+
   return (
     <div className="min-h-screen bg-[#f6fef9] flex items-center justify-center px-4 py-0  md:py-8">
       <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-6">
@@ -78,12 +125,48 @@ function Profile() {
               {userData?.email || "No email"}
             </p>
           </div>
-          <button
-            onClick={() => navigate("/complete-profile")}
-            className="bg-[#4CAF50] cursor-alias text-white px-4 py-2 rounded-lg hover:bg-[#3b873e] transition"
-          >
-            Update Profile
-          </button>
+
+          {/* Update Password Button */}
+          <div className="mt-6 text-center flex items-center gap-2">
+            <button
+              onClick={() => navigate("/complete-profile")}
+              className="bg-[#4CAF50] cursor-alias text-white px-3 py-[6px] rounded-lg hover:bg-[#3b873e] transition"
+            >
+              Update Profile
+            </button>
+            <button
+              onClick={() => setShowPasswordForm(!showPasswordForm)}
+              className="bg-indigo-600 text-white px-3 py-[6px] rounded-lg hover:bg-indigo-700 transition cursor-pointer"
+            >
+              Update Password
+            </button>
+          </div>
+
+          {/* Password Form */}
+          {showPasswordForm && (
+            <div className="mt-4 space-y-3">
+              <input
+                type="password"
+                placeholder="New Password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                className="w-full p-2 border rounded-lg"
+              />
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                className="w-full p-2 border rounded-lg"
+              />
+              <button
+                onClick={handleUpdatePassword}
+                className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition cursor-pointer"
+              >
+                Save New Password
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Divider */}
